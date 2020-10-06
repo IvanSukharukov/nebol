@@ -1,0 +1,32 @@
+AddDefaultCharset utf-8
+php_value max_execution_time 360000
+
+#запрещает просмотр папки, если нет индексного файла
+Options -Indexes
+
+#включить модуль
+RewriteEngine On
+
+#работаем с корнем сайта, там, где расположен файл .htaccess
+RewriteBase /
+
+RewriteRule ^([a-zA-Z]+)/([0-9]+)/$ /?cartController=$1&id=$2&%{QUERY_STRING} [NS,L]
+#RewriteRule ^addtocart/([0-9-]+)/?$ addtocart/?id=$1&% {QUERY_STRING}
+#&%
+#если в адресной строке product/11, то заменить на productView.php?product=11 (работает и тот и тот вариант)
+#RewriteRule product/11 productView.php?product=11
+#ищем product/любая цифра (запоминаем ее в $1)/слэш можно писать или не писать, $ - конец строки(дальше быть ничего не может)
+#[QSA] - добавить гет параметры, которые передаются дополнительно, иначе игнорирует их
+#RewriteRule ^product/([a-z0-9-]+)/?$ productView.php?product=$1 [QSA]
+
+
+
+#файлы и папки, которые существуют - подключать (f возможно стоит скрыть, т.е. если обратиться, то вид включается
+#для урока с роутингом
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#если не существует, то отправлять в import.php (м.б. index.php?)
+RewriteRule .* index.php
+
+#php_admin_flag allow_url_fopen On
