@@ -1,8 +1,9 @@
-$(function(){
+/* ===поиск=== */
+$(function () {
 	$('#autocomplete_header').autocomplete({//чтобы поиск был в двух местах, то нужна форма с другим id и в этой строчке д.б. такой же id
 		source: path + 'search/',
 		minLength: 2, // с какого символа начинать поиск
-		select: function( event, ui ){
+		select: function (event, ui) {
 			window.location = path + 'search/?search=' + encodeURIComponent(ui.item.value);
 		}
 	});
@@ -10,35 +11,35 @@ $(function(){
 	$('#autocomplete_catalog').autocomplete({//чтобы поиск был в двух местах, то нужна форма с другим id и в этой строчке д.б. такой же id
 		source: path + 'search/',
 		minLength: 2, // с какого символа начинать поиск
-		select: function( event, ui ){
+		select: function (event, ui) {
 			window.location = path + 'search/?search=' + encodeURIComponent(ui.item.value);
 		}
 	});
 });
 
 /* ===Клавиша ENTER при пересчете=== */
-$(".kolvo").keypress(function(e){
-	if(e.which == 13){
+$(".kolvo").keypress(function (e) {
+	if (e.which == 13) {
 		return false;
 	}
 });
 
 /* ===Пересчет товаров в корзине=== */
-$(".kolvo").each(function(){
+$(".kolvo").each(function () {
 	var qty_start = $(this).val(); // кол-во до изменения
 
-	$(this).change(function(){
+	$(this).change(function () {
 		var qty = $(this).val(); // кол-во перед пересчетом
 		var res = confirm("Пересчитать корзину?");
-		if(res){
+		if (res) {
 			var id = $(this).attr("id");
 			id = id.substr(2);
-			if(!parseInt(qty)){
+			if (!parseInt(qty)) {
 				qty = qty_start;
 			}
 			// передаем параметры
 			window.location = "cart/?qty=" + qty + "&id=" + id;
-		}else{
+		} else {
 			// если отменен пересчет корзины
 			$(this).val(qty_start);
 		}
@@ -46,8 +47,8 @@ $(".kolvo").each(function(){
 });
 
 
-/* ===увеличение/уменьшение товаров=== */
-$(document).ready(function() {
+/* ===увеличение/уменьшение товаров при добавлении в корзину/корзине=== */
+$(document).ready(function () {
 	$('.minus').click(function () {
 		var $input = $(this).parent().find('input');
 		var count = parseInt($input.val()) - 1;
@@ -73,28 +74,29 @@ Inputmask({
 
 
 /* ===слайдер=== */
-$(document).ready(function(){
-  $('.slider').slick({
-  	autoplay: true,
-  	autoplaySpeed: 700,
-  	speed: 1100,
-  	dots: true,
-  	// cssEase: 'linear',
-  	// cssEase: 'ease',
-  	useTransform: true,
-  	fade: true//затухание
-  	
-  });
+$(document).ready(function () {
+	$('.slider').slick({
+		autoplay: true,
+		autoplaySpeed: 1700,
+		speed: 1100,
+		dots: true,
+		// cssEase: 'linear',
+		// cssEase: 'ease',
+		useTransform: true,
+		fade: true//затухание
+
+	});
 });
 
 /* ===бургер-меню=== */
 const menuToggle = document.querySelector('#menu-togle');
 const mobileNavContainer = document.querySelector('#mobile-nav');
 
-menuToggle.onclick = function(){
-    menuToggle.classList.toggle('menu-icon-active');
-    mobileNavContainer.classList.toggle('mobile-nav--active');
+menuToggle.onclick = function () {
+	menuToggle.classList.toggle('menu-icon-active');
+	mobileNavContainer.classList.toggle('mobile-nav--active');
 }
+
 
 /* ===запретить отправку при заказе формы нажитием Enter=== */
 $(document).ready(function () {
@@ -105,3 +107,13 @@ $(document).ready(function () {
 		}
 	});
 });
+
+/* ===выбор аптеки=== */
+$(document).ready(function () {
+	$("#branch").change(function () {
+		var branch = this.value;
+		$.cookie('branch', branch, { expires: 7, path: '/' });
+		window.location = location.href;
+	});
+});
+

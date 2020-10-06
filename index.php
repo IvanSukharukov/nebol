@@ -8,6 +8,7 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
     $_SESSION['total_items'] = 0;
     $_SESSION['total_price'] = 0; //'0.00'
+    $_SESSION['branch'] = 'all'; //'0.00'
 }
 
 include 'config.php';
@@ -53,6 +54,9 @@ if (empty($match)) {
 //создать переменные измассива $match
 extract($match);
 
+//записать выбранную аптеку (выбор либо через select, либо $branch перезаписывается на id аптеки первого добавленного товара)
+
+$branch = (int)$_COOKIE['branch'] ? (int)$_COOKIE['branch'] : BRANCH;
 
 //повились следующие переменные
 //$product_alias - alias продукта

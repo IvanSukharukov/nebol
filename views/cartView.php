@@ -6,7 +6,7 @@
     </div>
     <?php if ($_SESSION['cart']) : ?>
         <div class="table_wrap">
-
+            <!-- <form method="post" action="" class="product-cart-all"> -->
             <? foreach($_SESSION['cart'] as $regid => $product):?>
 
             <form method="post" action="" class="product-cart">
@@ -25,7 +25,8 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="hidden" name="regid" value="<?= $product['regid'] ?>" />
+                                <input type="hidden" name="regid" value="<?= $regid ?>">
+                                <input type="hidden" name="branchid" value="<?= $product['branchid'] ?>">
                                 <input type="hidden" name="pricerozn" value="<?= $product['pricerozn'] ?>">
                                 <input type="hidden" name="ost" value="<?= $product['ost'] ?>">
                                 <button type="submit" name="addtocart" class="updatecart">&#8635</button>
@@ -39,17 +40,23 @@
                             <button type="submit" name="del-cart-product" class="del-cart-product">&times</button>
                         </div>
                     </div>
+                    <div class="fabr">Аптека: <?= $product['branch'] ?></div>
                 </div>
             </form>
 
             <?endforeach;?>
             <form method="post" action="" class="product-cart-all">
-                <div class="total_sum">Общая сумма заказа: <?= $_SESSION['total_sum'] ?> &#8381</div>
+                <div class="total_sum">Общая сумма заказа: <?= trim_zero($_SESSION['total_sum']) ?> &#8381</div>
 
                 <div class="del-order">
-                    <div class="del-order-btn"><input type="submit" class="product_to_cart_btn delete-cart-btn" name="delete-cart" value="Очистить корзину" /></div>
-                    <div class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn"><a href="<?= PATH ?>order/" alt="Оформить заказ">Оформить заказ</a></div>
+                    <div class="del-order-btn">
+                        <input type="submit" class="product_to_cart_btn delete-cart-btn" name="delete-cart" value="Очистить корзину" />
+                    </div>
+                    <div class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn">
+                        <a href="<?= PATH ?>order/" alt="Оформить заказ">Оформить заказ</a>
+                    </div>
                 </div>
+
             </form>
 
         <?php else : // если товаров нет 

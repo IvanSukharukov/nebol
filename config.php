@@ -9,8 +9,8 @@ define("DBHOST", "localhost");
 
 define("DBUSER", "root");
 define("DBPASS", "root");
-define("DB", "apteka");//price_test
-define("PATH", "http://productionapteka.loc/");
+define("DB", "apteka"); //price_test
+define("PATH", "http://aptekanew2.loc/");
 
 //define("DBUSER", "aneboltw_apt");
 //define("DBPASS", "Apt2025");//A!1234567
@@ -26,7 +26,8 @@ define("PATH", "http://productionapteka.loc/");
 define('ADMIN_EMAIL', 'admin@test.aneboltw.beget.tech');
 
 define("PERPAGE", 10);
-
+define("BRANCH", 1);
+$option_branches = [9117, 11263, 9758];
 /*$connection = @mysqli_connect(DBHOST, DBUSER, DBPASS, DB) or die("Нет соединения с БД");
 mysqli_report(MYSQLI_REPORT_ERROR);
 mysqli_set_charset($connection, "utf8") or die("Не установлена кодировка соединения");*/

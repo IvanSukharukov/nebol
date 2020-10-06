@@ -26,7 +26,11 @@
             </div>
 
             <?php if ($product) : ?>
-                <?php require 'product_form.php'; ?>
+                <?= $product[0]['tovName'] ?>
+                <?php foreach ($product as $product) : ?>
+                    <?php require 'product_form.php'; ?>
+                <?php endforeach; ?>
+
             <?php else : ?>
                 <div class="search_result no_result">Такого товара нет</div>
             <?php endif; ?>

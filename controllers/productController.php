@@ -6,7 +6,7 @@ include "models/{$view}Model.php";
 
 //получение одного продукта
 
-$product = get_one_product($product_alias);//alias присваивается в регулярном выражении в import.php
+$product = get_one_product($product_alias, $branch);//alias присваивается в регулярном выражении в import.php
 
 /*//обращение по id
 $product_id = $_GET['product'];

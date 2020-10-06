@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 1);//для ошибок
+ini_set('display_errors', 1); //для ошибок
 error_reporting(E_ALL);
 //defined("CATALOG") or die("Access denied!!!");
 define("CATALOG", TRUE);
@@ -12,18 +12,17 @@ $start = microtime(true);
 
 auth();
 //$ost_arr = ostByDate();
-$ost_arr = ostByDate_file_get_contents_curl();//получить все препараты
-write_db_OstByDate_all($ost_arr);//записать все препараты
+$ost_arr = ostByDate_file_get_contents_curl(); //получить все препараты
+write_db_OstByDate_all($ost_arr); //записать все препараты
 //$ost_arr = min_price_one_product($ost_arr);//обработать остатки, получить минимальные цены
-
 //write_db_OstByDate($ost_arr);//записать минимальные цены
-
 mail_import();
-//adress_aptek();
+
+//adress_branches();
 
 $finish = microtime(true);
 $delta = $finish - $start;
-echo '<hr>'. $delta . ' сек.';
+echo '<hr>' . $delta . ' сек.';
 
 
 /******************************************************************************
@@ -39,7 +38,7 @@ BranchId аптек, еще есть Id с маркировками
 13826 Маркировка Приладожский д.23а
 13845 Маркировка пр. Луначарского, д.72
 13846 Маркировка Луначарского пр-т, д.62, кор.1
-*/
+ */
 
 /*
 18458

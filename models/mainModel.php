@@ -6,12 +6,13 @@ defined("CATALOG") or die("Access denied");
  * @param null $value что проверяем
  * @param int $die ничего - остановить работу, 0 - продолжить
  */
-function d($value = null, $die = 1){
+function d($value = null, $die = 1)
+{
     echo 'Debag-режим: </br><pre>';
     print_r($value);
     echo '</pre>';
 
-    if($die) die;
+    if ($die) die;
 }
 
 /**
@@ -19,7 +20,8 @@ function d($value = null, $die = 1){
  * @param $array array
  * @param string $arrName
  */
-function print_arr($array, $arrName = ''){
+function print_arr($array, $arrName = '')
+{
     $info = debug_backtrace();
     echo "Имя масива/переменной: <b>" . $arrName . "</b><br>";
     //echo ("Имя масива: " . $info[0]['args'][1] . '<br>');//возможно где-то работать не будет, использовать код выше
@@ -33,10 +35,12 @@ function print_arr($array, $arrName = ''){
  * @param $var
  * @return string
  */
-function clear($var){
+function clear($var)
+{
     $var = mysqli_real_escape_string($GLOBALS['connection'], strip_tags(trim($var)));
     return $var;
 }
+
 
 /**
  * Обрезать нулевыt копейки у цены
@@ -45,6 +49,10 @@ function trim_zero($num)
 {
     return $num == (int)($num) ? (int)$num : $num;
 }
+
+
+
+
 
 /**
  * Получение страниц
@@ -71,7 +79,8 @@ function trim_zero($num)
  * @param bool $modrew true - работаем с ЧПУ, false - работаем по обычному
  *
  */
-function pagination($page, $count_pages, $modrew = true){
+function pagination($page, $count_pages, $modrew = true)
+{
     // << < 3 4 5 6 7 > >>
     $back = null; // ссылка НАЗАД
     $forward = null; // ссылка ВПЕРЕД
@@ -84,127 +93,63 @@ function pagination($page, $count_pages, $modrew = true){
 
     $uri = "?";
     // если есть параметры в запросе
-    if(!$modrew){
+    if (!$modrew) {
         //работаем без ЧПУ
-        if($_SERVER['QUERY_STRING']){
+        if ($_SERVER['QUERY_STRING']) {
             foreach ($_GET as $key => $value) {
-                if( $key != 'page' ) $uri .= "{$key}=$value&amp;";
+                if ($key != 'page') $uri .= "{$key}=$value&amp;";
             }
         }
-    }else{
+    } else {
         //работаем с ЧПУ
         $url = $_SERVER['REQUEST_URI'];
         $url = explode("?", $url);
-        if(isset($url[1]) && $url[1] != ''){
+        if (isset($url[1]) && $url[1] != '') {
             $params = explode("&", $url[1]);
-            foreach ($params as $param){
-                if(!preg_match("#page=#", $param)) $uri .="{$param}&amp;";
+            foreach ($params as $param) {
+                if (!preg_match("#page=#", $param)) $uri .= "{$param}&amp;";
             }
         }
     }
 
-    if( $page > 1 ){
-        $back = "<a class='nav-link' href='{$uri}page=" .($page-1). "'>&lt;</a>";
+    if ($page > 1) {
+        $back = "<a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>&lt;</a>";
     }
-    if( $page < $count_pages ){
-        $forward = "<a class='nav-link' href='{$uri}page=" .($page+1). "'>&gt;</a>";
+    if ($page < $count_pages) {
+        $forward = "<a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>&gt;</a>";
     }
-    if( $page > 3 ){
+    if ($page > 3) {
         $startpage = "<a class='nav-link' href='{$uri}page=1'>&laquo;</a>";
     }
-    if( $page < ($count_pages - 2) ){
+    if ($page < ($count_pages - 2)) {
         $endpage = "<a class='nav-link' href='{$uri}page={$count_pages}'>&raquo;</a>";
     }
-    if( $page - 2 > 0 ){
-        $page2left = "<a class='nav-link' href='{$uri}page=" .($page-2). "'>" .($page-2). "</a>";
+    if ($page - 2 > 0) {
+        $page2left = "<a class='nav-link' href='{$uri}page=" . ($page - 2) . "'>" . ($page - 2) . "</a>";
     }
-    if( $page - 1 > 0 ){
-        $page1left = "<a class='nav-link' href='{$uri}page=" .($page-1). "'>" .($page-1). "</a>";
+    if ($page - 1 > 0) {
+        $page1left = "<a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>" . ($page - 1) . "</a>";
     }
-    if( $page + 1 <= $count_pages ){
-        $page1right = "<a class='nav-link' href='{$uri}page=" .($page+1). "'>" .($page+1). "</a>";
+    if ($page + 1 <= $count_pages) {
+        $page1right = "<a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>" . ($page + 1) . "</a>";
     }
-    if( $page + 2 <= $count_pages ){
-        $page2right = "<a class='nav-link' href='{$uri}page=" .($page+2). "'>" .($page+2). "</a>";
+    if ($page + 2 <= $count_pages) {
+        $page2right = "<a class='nav-link' href='{$uri}page=" . ($page + 2) . "'>" . ($page + 2) . "</a>";
     }
 
-    return $startpage.$back.$page2left.$page1left.'<a class="nav-active">'.$page.'</a>'.$page1right.$page2right.$forward.$endpage;
+    return $startpage . $back . $page2left . $page1left . '<a class="nav-active">' . $page . '</a>' . $page1right . $page2right . $forward . $endpage;
 }
 
 
 /**
  *Редирект на ту же страницу, используется в обновлении корзины
  */
-function redirect(){
+function redirect()
+{
     $redirect = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : PATH;
     header("Location: $redirect");
     exit;
 }
-
-
-/**
- * Добавить в корзину
- * @param $regid
- * @param int $qty
- * @return mixed
- */
-
-/* function addToCart($regid, $qty){ //$_POST['amount']
-
-    if(isset($_SESSION['cart'][$regid])){
-
-        // если в массиве cart уже есть добавляемый товар
-
-        //если добавляемое кол-во больше допустимого остатка
-        if($_SESSION['cart'][$regid]['qty'] == $_SESSION['cart'][$regid]['ost']) $qty = 0;
-
-        //если повторное добавление больше допустимого остатка
-        if($_SESSION['cart'][$regid]['qty'] + $qty > $_SESSION['cart'][$regid]['ost']) $qty = $_SESSION['cart'][$regid]['ost'] - $_SESSION['cart'][$regid]['qty'];
-
-        //на странице корзины положить то кол-во, которое выбрано, а не суммировать старое и новое кол-во
-        if($_POST['qty_cart']) $_SESSION['cart'][$regid]['qty'] = $_POST['qty_cart'];
-
-        $_SESSION['cart'][$regid]['qty'] += $qty;
-        return $_SESSION['cart'];
-    }else{
-
-        // если товар кладется в корзину впервые
-        $_SESSION['cart'][$regid]['qty'] = $qty;
-        return $_SESSION['cart'];
-    }
-} */
-
-
-/**
- * Сумма заказа в корзине + атрибуты товара
- * @param $goods
- * @return float|int
- */
-/* function total_sum($goods){
-    $total_sum = 0;
-
-    $str_goods = implode(',',array_keys($goods));
-
-    $query = "SELECT *
-                FROM ostbydate
-                    WHERE `regid` IN ($str_goods)";
-
-    $res = mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
-
-    while($row = mysqli_fetch_assoc($res)){
-        $_SESSION['cart'][$row['regid']]['branchid'] = $row['branchid'];
-        $_SESSION['cart'][$row['regid']]['tovName'] = $row['tovName'];
-        $_SESSION['cart'][$row['regid']]['fabr'] = $row['fabr'];
-        $_SESSION['cart'][$row['regid']]['ost'] = $row['ost'];
-        $_SESSION['cart'][$row['regid']]['pricerozn'] = $row['pricerozn'];
-        $_SESSION['cart'][$row['regid']]['recipe'] = $row['recipe'];
-
-        $total_sum += $_SESSION['cart'][$row['regid']]['qty'] * $row['pricerozn'];
-    }
-    return $total_sum;
-} */
-
-
 
 /**
  * Проверить есть ли добавляемый товар в корзине, учитывая regid, branchid, pricerozn, ost
@@ -263,7 +208,7 @@ function atributes_product($next_item, $branchid, $pricerozn, $ost, $regid)
     $_SESSION['cart'][$next_item]['ost'] = $ost;
 
 
-    $query = "SELECT * FROM ostbydate WHERE `regid`='{$regid}' AND branchid = '{$branchid}' AND pricerozn = '{$pricerozn}' AND ost = '{$ost}' LIMIT 1";
+    $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `regid`='{$regid}' AND ostbydate_all.branchid = '{$branchid}' AND ostbydate_all. pricerozn = '{$pricerozn}' AND ostbydate_all.ost = '{$ost}'";
 
     $res = mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
 
@@ -296,20 +241,35 @@ function total_sum($goods)
     return $total_sum;
 }
 
-
 /**
  * Общее количество товаров
  *
  */
-function total_quantity(){
+function total_quantity()
+{
     $_SESSION['total_quantity'] = 0;
-    foreach($_SESSION['cart'] as $key => $value){
-        if(isset($value['pricerozn'])){
+    foreach ($_SESSION['cart'] as $key => $value) {
+        if (isset($value['pricerozn'])) {
             // если получена цена товара из БД - суммируем кол-во
             $_SESSION['total_quantity'] += $value['qty'];
-        }else{
+        } else {
             // иначе - удаляем такой ID из сессиии (корзины)
             unset($_SESSION['cart'][$key]);
         }
     }
+}
+
+
+/**
+ *Получить филиалы, маркировка отсекается
+ */
+function getBranches()
+{
+    $query = "SELECT * FROM `branches` WHERE `branchId`=`branch_main_id`";
+    $rs = mysqli_query($GLOBALS['connection'], $query);
+    $result_getBranches = [];
+    while ($row = mysqli_fetch_assoc($rs)) {
+        $result_getBranches[] = $row;
+    }
+    return $result_getBranches;
 }

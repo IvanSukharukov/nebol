@@ -30,7 +30,11 @@
             <?php if (is_array($result_search)) : ?>
 
                 <?php foreach ($result_search as $product) : ?>
-                    <?php require 'product_form.php'; ?>
+                    <?php //foreach ($product_group as $product) : 
+                    ?>
+                    <?php require 'product_form_list.php'; ?>
+                    <?php //endforeach; 
+                    ?>
                 <?php endforeach; ?>
 
                 <?php if ($count_pages > 1) : ?>

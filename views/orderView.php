@@ -55,7 +55,7 @@
         <? foreach($_SESSION['cart'] as $regid => $product):?>
         <div class="cart-details-body">
             <div class="cart-details-body__tovname"><?= $product['tovName']; ?></div>
-            <div class="cart-details-body__price"><?= trim_zero($product['pricerozn']); ?> &#8381 x <?= $product['qty']; ?> шт.</div>
+            <div class="cart-details-body__price"><?= $product['pricerozn']; ?> &#8381 x <?= $product['qty']; ?> шт.</div>
             <div class="cart-details-body__sum"><?= $product['pricerozn'] * $product['qty']; ?> &#8381</div>
         </div>
         <?endforeach;?>

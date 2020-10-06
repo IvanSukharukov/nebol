@@ -53,11 +53,42 @@
                         </div>
                     </form>
 
-                    <div class="address">
-                        Санкт-Петербург,
-                        пр. Просвещения,
-                        дом 20/25
+                    <!-- <div class="address<?php //if (!empty($_SESSION['cart'])) echo ' address-select-hide'; 
+                                            ?>">
+                        <select name="branch" id="branch">
+                            <option <?php //if ($branch == 1) echo "selected"; 
+                                    ?> value="1">Аптека не выбрана</option>
+                            <option <?php //if ($branch == 9117) echo "selected"; 
+                                    ?> value="9117, 15837">Просвещения</option>
+                            <option <?php //if ($branch == 11263) echo "selected"; 
+                                    ?> value="11263">Композиторов</option>
+                            <option <?php //if ($branch == 9758) echo "selected"; 
+                                    ?> value="9758">Луначарского</option>
+                        </select>
+                    </div> -->
+
+
+                    <div class="address<?php if (!empty($_SESSION['cart'])) echo ' address-select-hide'; ?>">
+                        <div class="apteka_zakaz">Аптека для заказа:</div>
+                        <div class="select" id="standard-select">
+                            <select name="branch" id="branch">
+                                <option <?php if ($branch == 1) echo "selected"; ?> value="1">Аптека не выбрана</option>
+
+                                <?php foreach ($branches as $branch_option) : ?>
+                                    <option <?php if ($branch == $branch_option['branch_main_id']) echo "selected"; ?> value="<?= $branch_option['branch_main_id'] ?>"><?= $branch_option['address'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="focus"></span>
+                        </div>
                     </div>
+
+                    <div>
+                        <div class="address-current<?php if (!empty($_SESSION['cart'])) echo ' address-current-view'; ?>" data-title="Чтобы сменить аптеку очистите корзину">
+                            Аптека для заказа:<br> <?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?>
+                        </div>
+                    </div>
+
+
                     <div class="phone"><a href="tel:+78122421872">+7 (812) 242-18-72</a></div>
 
                     <div class="header_cart">
@@ -126,4 +157,3 @@
             </div>
         </div>
     </header>
-    <?php print_arr($_SESSION['cart'],'SESSION'); ?>

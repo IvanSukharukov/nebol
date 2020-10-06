@@ -1,6 +1,6 @@
 <form action="" method="post">
     <div class="product">
-        <div class="product_name"><a href='<?= PATH ?>product/<?= $product['alias'] ?>'><?= $product['tovName'] ?></a></div>
+        <!-- <div class="product_name"><a href='<?= PATH ?>product/<?= $product['alias'] ?>?branchid=<?= $product['branchid'] ?>&pricerozn=<?= $product['pricerozn'] ?>&ost=<?= $product['ost'] ?>'><?= $product['tovName'] ?></a></div> -->
         <div class="product_content">
             <div class="fabr">Производитель: <?= $product['fabr'] ?></div>
             <div class="ost">В наличии: <?= $product['ost'] ?> шт.</div>
@@ -14,10 +14,12 @@
             </div>
             <div class="product_to_cart">
                 <input type="hidden" name="regid" value="<?= $product['regid'] ?>">
+                <input type="hidden" name="branchid" value="<?= $product['branchid'] ?>">
                 <input type="hidden" name="pricerozn" value="<?= $product['pricerozn'] ?>">
                 <input type="hidden" name="ost" value="<?= $product['ost'] ?>">
-                <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn">В корзину</button>
+                <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id="cartfix">В корзину</button>
             </div>
         </div>
+        <div class="fabr">Аптека: <?= $product['branch'] ?></div>
     </div>
 </form>

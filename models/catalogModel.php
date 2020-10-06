@@ -7,14 +7,27 @@ defined("CATALOG") or die("Access denied");
  * @param $perpage int сколько товаров на странице
  * @return array
  */
-function getProducts($start_pos, $perpage){
-    $query = "SELECT * FROM ostbydate LIMIT $start_pos, $perpage";//возможно стоит получать только нужное, для соритровки ORDER BY tovName
+function getProducts($branch, $start_pos, $perpage)
+{
+    //если аптека не выбрана - показать все препараты из всех аптек
+    if ($branch === 1) {
+        //получить дополнительно адреса аптек из таблицы branches
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid LIMIT $start_pos, $perpage";
+        $rs = mysqli_query($GLOBALS['connection'], $query);
+    } else {
+        //показать препараты выбранной аптеки
+        //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE ostbydate_all.branchid = $branch LIMIT $start_pos, $perpage";
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE branches.branch_main_id = $branch LIMIT $start_pos, $perpage";
 
-    $rs = mysqli_query($GLOBALS['connection'], $query);//Выполняет запрос к базе данных; $GLOBALS['db'] - обращение к переменной $db в db.php
+        //получить препараты по двум branchid (маркировка и обычные)
+        //SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE ostbydate_all.branchid IN(9117, 15837) LIMIT $start_pos, $perpage
+
+        $rs = mysqli_query($GLOBALS['connection'], $query);
+    }
 
     //получить значения из запроса в виде массива
     $rsProduct = [];
-    while ($row = mysqli_fetch_assoc($rs)){
+    while ($row = mysqli_fetch_assoc($rs)) {
         $rsProduct[] = $row;
     }
     return $rsProduct;
@@ -24,8 +37,9 @@ function getProducts($start_pos, $perpage){
 /**
  *Количество товаров
  */
-function countGoods(){
-    $query = 'SELECT COUNT(*) FROM ostbydate';
+function countGoodsAllProduct()
+{
+    $query = 'SELECT COUNT(*) FROM ostbydate_all';
     $res = mysqli_query($GLOBALS['connection'], $query);
     $count_goods = mysqli_fetch_row($res);
     return $count_goods['0'];

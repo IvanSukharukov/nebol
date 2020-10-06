@@ -10,7 +10,7 @@ include "models/{$view}Model.php";
             $perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE;
 
             //Общее количество товаров
-            $count_goods = countGoods();
+            $count_goods = countGoodsAllProduct();
 
             //необходимое количество страниц для отображения
             $count_pages = ceil($count_goods / PERPAGE);
@@ -36,7 +36,7 @@ include "models/{$view}Model.php";
 
 /*====================Пагинация=====================*/
 
-$arr_product = getProducts($start_pos, PERPAGE);
+$arr_product = getProducts($branch, $start_pos, PERPAGE);
 
 
 

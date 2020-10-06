@@ -20,12 +20,12 @@ include 'models/mainModel.php';
     total_quantity();
     redirect();
 }*/
-//$branchid = 9117;
+$branchid = 1;
 if (isset($_POST['addtocart'])) {
     $regid = abs((int)$_POST['regid']);
     $qty = abs((int)$_POST['qty']);
-    $branchid = 9117;
-    $pricerozn = abs((float)$_POST['pricerozn']); //цена приводится к float, возможно где-то не будет работать, в БД тип decimal(10,1)
+    $branchid = abs((int)$_POST['branchid']);
+    $pricerozn = abs((float)$_POST['pricerozn']);//цена приводится к float, возможно где-то не будет работать, в БД тип decimal(10,1)
     $ost = abs((int)$_POST['ost']);
 
     //добавить в корзину
@@ -36,3 +36,12 @@ if (isset($_POST['addtocart'])) {
     total_quantity();
     redirect();
 }
+
+//записать в $_COOKIE['branch'] id аптеки первого добавленного товара
+if (!empty(current($_SESSION['cart']))) {
+    // $_COOKIE['branch'] = current($_SESSION['cart'])['branchid'];
+    $branch = current($_SESSION['cart'])['branchid'];
+}
+
+//все аптеки, маркировка из списка отсекается
+$branches = getBranches();
