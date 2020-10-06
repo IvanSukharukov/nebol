@@ -10,7 +10,7 @@ define("DBHOST", "localhost");
 define("DBUSER", "root");
 define("DBPASS", "root");
 define("DB", "apteka");//price_test
-define("PATH", "http://productionapteka.loc/");
+define("PATH", "http://aptekanew2.loc/");
 
 //define("DBUSER", "aneboltw_apt");
 //define("DBPASS", "Apt2025");//A!1234567
