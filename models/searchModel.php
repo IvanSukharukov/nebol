@@ -2,9 +2,6 @@
 defined("CATALOG") or die("Access denied");
 
 
-
-
-
 /**
  *Поиск автокомплит для живого поиска
  */
@@ -61,14 +58,10 @@ function replace_tovName_with_key($arr)
 function limit_sql($arr, $page)
 {
     $limit = 0;
-  
         for ($i = ($page - 1) * 10; $i < (($page - 1) * 10 + 10) && $i < count($arr); $i++) {
             $limit += count($arr[$i]);
         print_arr($i, '');
         }
-    
-    
-
     return $limit;
 }
 
