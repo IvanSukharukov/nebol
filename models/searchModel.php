@@ -58,31 +58,46 @@ function replace_tovName_with_key($arr)
  * Лимит запросов для получения товаров
  * должен вернуть количество для запроса, и это количество нужно запомнить
  */
-function limit_sql($arr, $start_pos)
+function limit_sql($arr, $page)
 {
     $limit = 0;
-    //!print_arr($arr,'arr');
-    for ($i = $start_pos; $i < 9 && $i < count($arr); $i++) {
-        $limit += count($arr[$i]);
-    }
-    //print_arr($limit,'limit');
+  
+        for ($i = ($page - 1) * 10; $i < (($page - 1) * 10 + 10) && $i < count($arr); $i++) {
+            $limit += count($arr[$i]);
+        print_arr($i, '');
+        }
+    
+    
+
     return $limit;
 }
 
+/**
+ * Стартовая позиция
+ */
+function result_search_page ($arr, $page) {
+    $result_search = [];
+    for ($i = ($page - 1) * 10; $i < (($page - 1) * 10 + 10) && $i < count($arr); $i++) {
+        $result_search[] = $arr[$i];
+    }
+    return $result_search;
+}
 
 /**
  *Количество результатов поиска
  */
-function countSearch($branch)
+function allSearch($branch)
 {
     $search = trim(mysqli_real_escape_string($GLOBALS['connection'], $_GET['search']));
     //$query = "SELECT COUNT(*) FROM ostbydate_all WHERE tovName LIKE '%{$search}%'";
     //если аптека не выбрана
     if ($branch === 1) {
         //получить дополнительно адреса аптек из таблицы branches
-        $query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
+        //$query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
     } else {
-        $query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName";
+        //$query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName";
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName";
     }
     $res = mysqli_query($GLOBALS['connection'], $query);
     /* $count_search = mysqli_fetch_row($res);
@@ -91,8 +106,10 @@ function countSearch($branch)
     while ($row = mysqli_fetch_assoc($res)) {
         $result_search[] = $row;
     }
-    $count_search = count(do_group_products($result_search));
-    return $count_search;
+    //$count_search = count(do_group_products($result_search));
+
+    //return do_group_products($result_search);
+    return $result_search;
 }
 
 
@@ -117,7 +134,7 @@ function search($branch, $start_pos, $perpage)
         //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY pricerozn";
 
         //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName LIMIT $start_pos, $perpage";
-        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName, pricerozn";
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName, pricerozn LIMIT $start_pos, $perpage";
     } else {
         $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName LIMIT $start_pos, $perpage";
     }

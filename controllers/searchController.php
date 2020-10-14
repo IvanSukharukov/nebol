@@ -12,8 +12,10 @@ if (isset($_GET['term'])) {
 } elseif (isset($_GET['search']) && $_GET['search']) {
 
     /*====================Пагинация=====================*/
+    //полный массив искомого товара
+    $result_search_all = do_group_products(allSearch($branch));
     //Общее количество товаров
-    $count_goods = countSearch($branch);
+    $count_goods = count($result_search_all);
     //необходимое количество страниц для отображения
     $count_pages = ceil($count_goods / PERPAGE);
     //минимум 1 страница
@@ -29,18 +31,41 @@ if (isset($_GET['term'])) {
     if ($page > $count_pages) $page = $count_pages;
     //начальная позиция для запроса в БД
     //$start_pos = ($page - 1) * PERPAGE;
+    
+   //var_dump($start_pos);
+    //$start_pos = ($page - 1) * $limit_sql; //!менять это
+
+    
+    
+    
+    //$result_search = search($branch, $start_pos, PERPAGE);
+    
+    //$start_pos = start_pos($page, $result_search_limit); //!менять это
+
+    //$limit_sql = limit_sql($result_search_limit, $start_pos); //!эта функция должна возвращать лимит для запроса
+    
+    //$limit_sql = limit_sql($result_search_limit, $page); //!эта функция должна возвращать лимит для запроса
+
+    /*     if ($page == 1) {
+        $start_pos = 0;
+    } else {
+        $start_pos = $limit_sql;
+    } */
+
+    //$result_search = search($branch, $start_pos, $limit_sql);
+
+    $result_search = result_search_page(replace_tovName_with_key($result_search_all), $page);
+    
+    //print_arr(replace_tovName_with_key($result_search_all),'');
 
 
-    $start_pos = ($page - 1) * $limit_sql; //!менять это
-    $result_search = search($branch, $start_pos, PERPAGE);
-    $limit_sql = limit_sql($result_search, $start_pos); //!эта функция должна возвращать лимит для запроса
     //$limit_sql = replace_tovName_with_key(do_group_products($arr), $start_pos);
-
 
 
     $pagination = pagination($page, $count_pages);
     /*====================Пагинация=====================*/
 
+    //$result_search = search($start_pos, PERPAGE);
 
     //$result_search = search($branch, $start_pos, $limit_sql);//!менять это
 } else {
