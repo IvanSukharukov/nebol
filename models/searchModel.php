@@ -5,10 +5,27 @@ defined("CATALOG") or die("Access denied");
 /**
  *Поиск автокомплит для живого поиска
  */
-function search_autocomplete()
+/* function search_autocomplete()
 {
     $search = trim(mysqli_real_escape_string($GLOBALS['connection'], $_GET['term']));
     $query = "SELECT DISTINCT tovName FROM ostbydate_all WHERE tovName LIKE '%{$search}%' LIMIT 10";
+    $res = mysqli_query($GLOBALS['connection'], $query);
+    $result_search = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        $result_search[] = $row['tovName'];
+    }
+    return $result_search;
+} */
+
+function search_autocomplete()
+{    
+    $search = trim(mysqli_real_escape_string($GLOBALS['connection'], $_GET['term']));
+    $searchWords = explode(" ", $search);
+    $query = "SELECT DISTINCT tovName FROM ostbydate_all WHERE tovName LIKE '%'";
+    foreach ($searchWords as $word) {
+        $query .= " AND tovName LIKE '%{$word}%'";
+    }
+    $query .= " LIMIT 10";
     $res = mysqli_query($GLOBALS['connection'], $query);
     $result_search = [];
     while ($row = mysqli_fetch_assoc($res)) {
