@@ -1,5 +1,5 @@
-/* ===поиск=== */
-$(function () {
+/* ===Поиск=== */
+$(function(){
 	$('#autocomplete_header').autocomplete({//чтобы поиск был в двух местах, то нужна форма с другим id и в этой строчке д.б. такой же id
 		source: path + 'search/',
 		minLength: 2, // с какого символа начинать поиск
@@ -68,8 +68,8 @@ $(document).ready(function () {
 /* ===маска для ввода номера телефона=== */
 var inputsTel = document.querySelectorAll('input[type="tel"]');
 Inputmask({
-	"mask": "+7(999) 999-99-99",
-	showMaskOnHover: false
+	"mask": "+7(999)  999-99-99",
+	showMaskOnHover: false,
 }).mask(inputsTel);
 
 
