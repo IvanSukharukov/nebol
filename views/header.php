@@ -15,7 +15,7 @@
 
     <!-- Управление доступом поисковых роботов к странице -->
     <!-- <meta name="robots" content="none"> -->
-    
+
     <meta name="mailru-verification" content="62574aefae115c70" />
     <meta charset="utf-8">
     <link rel="shortcut icon" href="<?= PATH ?>favicon.ico" type="image/x-icon">
@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/slick/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/css/style.css">
+
+    <title>Аптека Неболейка</title>
 
 </head>
 
