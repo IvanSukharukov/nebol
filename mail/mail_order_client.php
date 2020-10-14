@@ -106,7 +106,7 @@
                   <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center">
                      <tr>
                         <td>
-                           Здравствуйте, <?= $_SESSION['order']['name'] ?>!<br />
+                           Здравствуйте, <b><?= $_SESSION['order']['name'] ?></b>!<br />
                         </td>
                      </tr>
                   </table>
@@ -236,7 +236,12 @@
                   <table class="table-600 mail-text" cellpadding="0" cellspacing="0" width="600" align="center">
                      <tr>
                         <td>
-                           <i>В случае изменения или отмены заказа, а также по другим вопросам, свяжитесь с нами по e-mail: <a href="mailto:aneboleyka@mail.ru">aneboleyka@mail.ru</a> или телефону <a href="tel:+78122421872">+7 (812) 242-18-72</a></i>
+                           <i>Данное письмо отправлено автоматически и не требует ответа. В случае изменения или отмены заказа, а также по другим вопросам, свяжитесь с нами по e-mail: <a href="mailto:aneboleyka@mail.ru">aneboleyka@mail.ru</a> или телефону <a href="tel:+78122421872">+7 (812) 242-18-72</a></i>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <i>Не является публичной офертой</i>
                         </td>
                      </tr>
                   </table>

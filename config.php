@@ -22,8 +22,8 @@ define("PATH", "http://aptekanew2.loc/");
 //define("PATH", "http://aptekaneboleyka.ru/");
 
 //define('ADMIN_EMAIL', 'iva2742@mail.ru');
-//define('ADMIN_EMAIL', 'admin@aptekaneboleyka.ru');
-define('ADMIN_EMAIL', 'admin@test.aneboltw.beget.tech');
+define('ADMIN_EMAIL', 'info@aptekaneboleyka.ru');
+//define('ADMIN_EMAIL', 'admin@test.aneboltw.beget.tech');
 
 define("PERPAGE", 10);
 define("BRANCH", 1);
