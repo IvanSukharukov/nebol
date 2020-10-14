@@ -273,3 +273,37 @@ function getBranches()
     }
     return $result_getBranches;
 }
+
+
+/**
+ * Сделать группировку по наименованию входящего массива([анальгин][0]параметры[1])
+ */
+function do_group_products($arr)
+{
+    $result_group = [];
+    for ($i = 0; $i < count($arr); $i++) {
+
+        //$key_num = (array_key_last($result_group)) ?? 0;
+
+        //в эту переменную записываем ключ товара, если он найден
+        $key_tovName = array_search($arr[$i]['tovName'], array_column($result_group, 'tovName'));
+        if ($key_tovName !== false) { //если товар найден, то записать его атрибуты
+            $result_group[$key_tovName][] = $arr[$i];
+        } else { //если такого товара нет в результирующем массиве сделать новую запись с атрибутами
+            $result_group[$arr[$i]['tovName']][] = $arr[$i];
+        }
+    }
+    return $result_group;
+}
+
+/**
+ * Заменить ключ-название на ключ-цифру
+ */
+function replace_tovName_with_key($arr)
+{
+    $replace_arr_key = [];
+    foreach ($arr as $value) {
+        $replace_arr_key[] = $value;
+    }
+    return $replace_arr_key;
+}
