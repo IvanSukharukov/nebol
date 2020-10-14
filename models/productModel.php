@@ -23,7 +23,7 @@ function get_one_product($product_alias, $branch)
                 $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias'";
         } else {
                 //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND branches.branch_main_id = '$branch' AND ostbydate_all.branchid = 9208 LIMIT 1";
-                echo $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND ostbydate_all.branchid = '$branch'";
+                $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND ostbydate_all.branchid = '$branch'";
         }
 
 

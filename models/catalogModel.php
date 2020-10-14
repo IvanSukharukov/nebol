@@ -30,6 +30,10 @@ function getProducts($branch, $start_pos, $perpage)
     while ($row = mysqli_fetch_assoc($rs)) {
         $rsProduct[] = $row;
     }
+
+    $rsProduct = replace_tovName_with_key(do_group_products($rsProduct));
+
+
     return $rsProduct;
 }
 

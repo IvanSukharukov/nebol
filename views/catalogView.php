@@ -27,12 +27,14 @@
 
             <?php if ($arr_product) : ?>
                 <?php foreach ($arr_product as $product) : ?>
-                    
-                    <?php require 'product_form.php'; ?>
+
+                    <?php require 'product_form_list.php'; ?>
 
                 <?php endforeach; ?>
             <?php endif; ?>
-            <div class="pagination"><?= $pagination; ?></div>
+            <?php if ($count_pages > 1) : ?>
+                <div class="pagination"><?= $pagination; ?></div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
