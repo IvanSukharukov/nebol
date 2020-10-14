@@ -15,7 +15,8 @@
 
     <!-- Управление доступом поисковых роботов к странице -->
     <!-- <meta name="robots" content="none"> -->
-
+    
+    <meta name="mailru-verification" content="62574aefae115c70" />
     <meta charset="utf-8">
     <link rel="shortcut icon" href="<?= PATH ?>favicon.ico" type="image/x-icon">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
