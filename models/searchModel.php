@@ -8,7 +8,7 @@ defined("CATALOG") or die("Access denied");
 function search_autocomplete()
 {
     $search = trim(mysqli_real_escape_string($GLOBALS['connection'], $_GET['term']));
-    $query = "SELECT tovName FROM ostbydate_all WHERE tovName LIKE '%{$search}%' LIMIT 10";
+    $query = "SELECT DISTINCT tovName FROM ostbydate_all WHERE tovName LIKE '%{$search}%' LIMIT 10";
     $res = mysqli_query($GLOBALS['connection'], $query);
     $result_search = [];
     while ($row = mysqli_fetch_assoc($res)) {
