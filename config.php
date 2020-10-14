@@ -15,7 +15,7 @@ define("PATH", "http://aptekanew2.loc/");
 //define("DBUSER", "aneboltw_apt");
 //define("DBPASS", "Apt2025");//A!1234567
 //define("DB", "aneboltw_apt");
-//define("PATH", "http://test.aneboltw.beget.tech/");
+//define("PATH", "http://aptekaneboleyka.ru/");
 
 
 
