@@ -3,7 +3,7 @@ defined("CATALOG") or die("Access denied");
 
 
 /**
- *Поиск автокомплит для живого поиска
+ *Поиск автокомплит для живого поиска по нескольким словам
  */
 /* function search_autocomplete()
 {
@@ -63,20 +63,34 @@ function result_search_page ($arr, $page) {
 }
 
 /**
- *Количество результатов поиска
+ *Весь массив искомого товара (по нескольким словам)
  */
 function allSearch($branch)
 {
     $search = trim(mysqli_real_escape_string($GLOBALS['connection'], $_GET['search']));
+
+    $searchWords = explode(" ", $search);
     //$query = "SELECT COUNT(*) FROM ostbydate_all WHERE tovName LIKE '%{$search}%'";
     //если аптека не выбрана
     if ($branch === 1) {
         //получить дополнительно адреса аптек из таблицы branches
-        //$query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
-        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
+        //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' ORDER BY tovName";
+        
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%'";
+        foreach ($searchWords as $word) {
+            $query .= " AND tovName LIKE '%{$word}%'";
+        }
+        $query .= " ORDER BY tovName";
+
+
     } else {
-        //$query = "SELECT COUNT(*) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName";
-        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%{$search}%' AND branches.branch_main_id = $branch ORDER BY tovName";
+        $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE tovName LIKE '%'";
+
+        foreach ($searchWords as $word) {
+            $query .= " AND tovName LIKE '%{$word}%'";
+        }
+        $query .= " AND branches.branch_main_id = $branch ORDER BY tovName";
+
     }
     $res = mysqli_query($GLOBALS['connection'], $query);
     /* $count_search = mysqli_fetch_row($res);
