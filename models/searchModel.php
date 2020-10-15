@@ -80,7 +80,7 @@ function allSearch($branch)
         foreach ($searchWords as $word) {
             $query .= " AND tovName LIKE '%{$word}%'";
         }
-        $query .= " ORDER BY tovName";
+        $query .= " ORDER BY pricerozn, tovName";
 
 
     } else {
@@ -89,7 +89,7 @@ function allSearch($branch)
         foreach ($searchWords as $word) {
             $query .= " AND tovName LIKE '%{$word}%'";
         }
-        $query .= " AND branches.branch_main_id = $branch ORDER BY tovName";
+        $query .= " AND branches.branch_main_id = $branch ORDER BY pricerozn, tovName";
 
     }
     $res = mysqli_query($GLOBALS['connection'], $query);
