@@ -102,14 +102,14 @@
                                 <a href="<?= PATH ?>cart/"><img src="<?= PATH ?>views/img/buy64.png"></a>
                             </div>
                             <div class="header_cart__count">
-                                <?= $_SESSION['total_quantity'] ?>
+                                <a href="<?= PATH ?>cart/"><?= $_SESSION['total_quantity'] ?></a>
                             </div>
                         <?php else : ?>
                             <div class="header_cart__icon">
                                 <a href="<?= PATH ?>cart/"><img src="<?= PATH ?>views/img/buy64.png"></a>
                             </div>
                             <div class="header_cart__count_zero">
-                                0
+                                <a href="<?= PATH ?>cart/">0</a>
                             </div>
                         <?php endif; ?>
                     </div>

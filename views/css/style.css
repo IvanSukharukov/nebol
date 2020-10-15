@@ -354,6 +354,13 @@ header {
 	color: #fff;
 	text-align: center;
 }
+
+
+.header_cart__count a,
+.header_cart__count_zero a {
+	color: #fff;
+}
+
 .slider{
 	max-height: 500px;
 	width: 100%;
