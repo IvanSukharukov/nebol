@@ -52,9 +52,9 @@
                     <div class="del-order-btn">
                         <input type="submit" class="product_to_cart_btn delete-cart-btn" name="delete-cart" value="Очистить корзину" />
                     </div>
-                    <div class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn">
-                        <a href="<?= PATH ?>order/" alt="Оформить заказ">Оформить заказ</a>
-                    </div>
+                    <!-- <div class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn"> -->
+                        <a href="<?= PATH ?>order/" alt="Оформить заказ" class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn">Оформить заказ</a>
+                    <!-- </div> -->
                 </div>
 
             </form>

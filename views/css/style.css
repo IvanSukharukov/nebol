@@ -732,6 +732,9 @@ header {
 		.stepper__input {
 			width: 90px;
 		}
+		.btn-ost {
+			width: 170px;
+		}
 		.product_to_cart, .sum {
 			flex-basis: 10%;
 		}
@@ -1541,10 +1544,9 @@ label {
   margin-top: 2rem;
 }
 
-
-
-
-
+.btn-ost {
+	width: 170px;
+}
 
 
 
