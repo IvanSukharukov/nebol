@@ -729,6 +729,9 @@ header {
 			/*flex-basis: 12%;*/
 			margin-top: 0;
 		}
+		.stepper__input {
+			width: 90px;
+		}
 		.product_to_cart, .sum {
 			flex-basis: 10%;
 		}
@@ -1836,9 +1839,7 @@ label {
 	.stepper {
 		flex-basis: 23%;
 	}
-	.stepper__input {
-		width: 90px;
-	}
+	
 	.licenses_page {
 	    max-width: 100%;
 	    margin: 30px 0 50px;
