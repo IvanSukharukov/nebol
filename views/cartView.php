@@ -7,7 +7,7 @@
     <?php if ($_SESSION['cart']) : ?>
         <div class="table_wrap">
             <!-- <form method="post" action="" class="product-cart-all"> -->
-            <? foreach($_SESSION['cart'] as $regid => $product):?>
+            <? foreach($_SESSION['cart'] as $key => $product):?>
 
             <form method="post" action="" class="product-cart">
                 <div class="product">
@@ -18,14 +18,14 @@
                         <div class="price"><?= trim_zero($product['pricerozn']) ?> &#8381<span> x <?= $product['qty']; ?> шт.</span></div>
                         <div class="stepper_and_update">
                             <div class="stepper stepper-cart stepper--style-2 js-spinner">
-                                <input type="number" id="id<?= $regid ?>" min="1" max="<?= $product['ost'] ?>" step="1" value="<?= $product['qty']; ?>" class="stepper__input" name="qty_cart">
+                                <input type="number" id="id<?= $key ?>" min="1" max="<?= $product['ost'] ?>" step="1" value="<?= $product['qty']; ?>" class="stepper__input" name="qty_cart">
                                 <div class="stepper__controls">
                                     <button type="submit" spinner-button="up" name="addtocart">+</button>
                                     <button type="submit" spinner-button="down" name="addtocart">−</button>
                                 </div>
                             </div>
                             <div>
-                                <input type="hidden" name="regid" value="<?= $regid ?>">
+                                <input type="hidden" name="regid" value="<?= $product['regid'] ?>">
                                 <input type="hidden" name="branchid" value="<?= $product['branchid'] ?>">
                                 <input type="hidden" name="pricerozn" value="<?= $product['pricerozn'] ?>">
                                 <input type="hidden" name="ost" value="<?= $product['ost'] ?>">

@@ -157,7 +157,7 @@ function redirect()
 function double_Product_Cart($regid, $branchid, $pricerozn, $ost)
 {
     foreach ($_SESSION['cart'] as $key => $product) {
-        if (($_SESSION['cart'][$key]['regid'] == $regid) &&  ($_SESSION['cart'][$key]['branchid'] == $branchid) &&  ($_SESSION['cart'][$key]['pricerozn'] == $pricerozn) && ($_SESSION['cart'][$key]['ost'] == $ost)) {
+        if (($_SESSION['cart'][$key]['regid'] == $regid) && ($_SESSION['cart'][$key]['branchid'] == $branchid) &&  ($_SESSION['cart'][$key]['pricerozn'] == $pricerozn) && ($_SESSION['cart'][$key]['ost'] == $ost)) {
             return $key; //если найден, то вернуть ключ этого товара, далее в addToCart добавить количество
         }
     }
@@ -173,17 +173,18 @@ function double_Product_Cart($regid, $branchid, $pricerozn, $ost)
  */
 function addToCart($regid, $qty, $branchid, $pricerozn, $ost)
 {
-
-    if (double_Product_Cart($regid, $branchid, $pricerozn, $ost) !== false) { // ноль тоже проходит эту проверку
-        $key = double_Product_Cart($regid, $branchid, $pricerozn, $ost);
-
+    //проверка, есть ли товар в корзине
+    $key = double_Product_Cart($regid, $branchid, $pricerozn, $ost);
+    if ($key !== false) { // ноль тоже проходит эту проверку
+        //$key = double_Product_Cart($regid, $branchid, $pricerozn, $ost);//!ранее было так
+        
         //если добавляемое кол-во больше допустимого остатка
         if ($_SESSION['cart'][$key]['qty'] == $_SESSION['cart'][$key]['ost']) $qty = 0;
         //если повторное добавление больше допустимого остатка
         if ($_SESSION['cart'][$key]['qty'] + $qty > $_SESSION['cart'][$key]['ost']) $qty = $_SESSION['cart'][$key]['ost'] - $_SESSION['cart'][$key]['qty'];
         //на странице корзины положить то кол-во, которое выбрано, а не суммировать старое и новое кол-во
-        if ($_POST['qty_cart']) $_SESSION['cart'][$key]['qty'] = $_POST['qty_cart'];
-
+        if ($_POST['qty_cart']) $_SESSION['cart'][$key]['qty'] = abs((int)$_POST['qty_cart']);
+        
         $_SESSION['cart'][$key]['qty'] += $qty;
     } else {
         // если товар кладется в корзину впервые
@@ -191,7 +192,7 @@ function addToCart($regid, $qty, $branchid, $pricerozn, $ost)
         $next_item = array_key_last($_SESSION['cart']); //последний ключ
         atributes_product($next_item, $branchid, $pricerozn, $ost, $regid);
     }
-
+    
     return $_SESSION['cart'];
 }
 
