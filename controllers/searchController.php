@@ -14,33 +14,35 @@ if (isset($_GET['term'])) {
     /*====================Пагинация=====================*/
     //полный массив искомого товара
     $result_search_all = do_group_products(allSearch($branch));
-    //Общее количество товаров
-    $count_goods = count($result_search_all);
-    //необходимое количество страниц для отображения
-    $count_pages = ceil($count_goods / PERPAGE);
-    //минимум 1 страница
-    if (!$count_pages) $count_pages = 1;
-    //получение текущей страницы
-    if (isset($_GET['page'])) {
-        $page = (int)$_GET['page'];
-        if ($page < 1) $page = 1;
+    if (!empty($result_search_all)) {    
+        //Общее количество товаров
+        $count_goods = count($result_search_all);
+        //необходимое количество страниц для отображения
+        $count_pages = ceil($count_goods / PERPAGE);
+        //минимум 1 страница
+        if (!$count_pages) $count_pages = 1;
+        //получение текущей страницы
+        if (isset($_GET['page'])) {
+            $page = (int)$_GET['page'];
+            if ($page < 1) $page = 1;
+        } else {
+            $page = 1;
+        }
+        //если запрошенная страница больше максимума
+        if ($page > $count_pages) $page = $count_pages;
+
+        $result_search = result_search_page(replace_tovName_with_key($result_search_all), $page);
+
+        $pagination = pagination($page, $count_pages);
     } else {
-        $page = 1;
+        $result_search = 'Ничего не найдено. Повторите поисковой запрос.';
     }
-    //если запрошенная страница больше максимума
-    if ($page > $count_pages) $page = $count_pages;
-
-    $result_search = result_search_page(replace_tovName_with_key($result_search_all), $page);
-
-    $pagination = pagination($page, $count_pages);
     /*====================Пагинация=====================*/
 
     //$result_search = search($start_pos, PERPAGE);
 
     //$result_search = search($branch, $start_pos, $limit_sql);//!менять это
-} else {
-    $result_search = 'Повторите поисковой запрос';
-}
+} 
 
 
 /*if( !isset($page_alias) ) $page_alias = 'index'; // назначаем главную страницу

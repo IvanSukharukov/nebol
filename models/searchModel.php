@@ -96,6 +96,8 @@ function allSearch($branch)
     /* $count_search = mysqli_fetch_row($res);
     return $count_search[0]; */
 
+    
+
     while ($row = mysqli_fetch_assoc($res)) {
         $result_search[] = $row;
     }
@@ -133,14 +135,14 @@ function search($branch, $start_pos, $perpage)
     }
     $res = mysqli_query($GLOBALS['connection'], $query);
 
-    if (!mysqli_num_rows($res)) {
-        return 'Ничего не найдено';
-    }
+   
     $result_search = [];
     while ($row = mysqli_fetch_assoc($res)) {
         $result_search[] = $row;
     }
-    $result_search = replace_tovName_with_key(do_group_products($result_search)); //!
+    
+        $result_search = replace_tovName_with_key(do_group_products($result_search)); //!
+   
     //$result_search = do_group_products($result_search);//!
     //print_arr($result_search, '$result_search');
     return $result_search;
