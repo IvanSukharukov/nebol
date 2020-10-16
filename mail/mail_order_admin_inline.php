@@ -131,124 +131,124 @@
                      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
                         <tr>
                            <td style="border-collapse: collapse;">
-                              Аптека совершения заказа: <b>пр.Просвещения, д.20/25</b><br>
+                              Аптека совершения заказа: <b><?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?></b><br>
                            </td>
                         </tr>
                      </table>
                   </td>
                </tr>
-   
-   <tr>
-      <td bgcolor="#ffffff" style="border-collapse: collapse;">
-         <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+
+               <tr>
+                  <td bgcolor="#ffffff" style="border-collapse: collapse;">
+                     <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                        <tr>
+                           <td style="border-collapse: collapse;">
+                              Адрес доставки: <b><?= $_SESSION['order']['addres'] ?></b><br>
+                           </td>
+                        </tr>
+                     </table>
+                  </td>
+               </tr>
+            <?php endif; ?>
+
             <tr>
                <td style="border-collapse: collapse;">
-                  Адрес доставки: <b><?= $_SESSION['order']['addres'] ?></b><br>
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           Номер заказа: <b>№<?= $order_id ?></b><br>
+                        </td>
+                     </tr>
+                  </table>
                </td>
             </tr>
-         </table>
-      </td>
-   </tr>
-<?php endif; ?>
-
-<tr>
-   <td style="border-collapse: collapse;">
-      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-         <tr>
-            <td style="border-collapse: collapse;">
-               Номер заказа: <b>№<?= $order_id ?></b><br>
-            </td>
-         </tr>
-      </table>
-   </td>
-</tr>
-<tr>
-   <td style="border-collapse: collapse;">
-      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-         <tr>
-            <td style="border-collapse: collapse;">
-               Телефон: <b><?= $_SESSION['order']['phone'] ?></b><br>
-            </td>
-         </tr>
-      </table>
-   </td>
-</tr>
-
-<?php if (!empty($_SESSION['order']['prim'])) : ?>
-   <tr>
-      <td style="border-collapse: collapse;">
-         <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
             <tr>
                <td style="border-collapse: collapse;">
-                  Примечание: <?= $_SESSION['order']['prim'] ?><br>
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           Телефон: <b><?= $_SESSION['order']['phone'] ?></b><br>
+                        </td>
+                     </tr>
+                  </table>
                </td>
             </tr>
+
+            <?php if (!empty($_SESSION['order']['prim'])) : ?>
+               <tr>
+                  <td style="border-collapse: collapse;">
+                     <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                        <tr>
+                           <td style="border-collapse: collapse;">
+                              Примечание: <?= $_SESSION['order']['prim'] ?><br>
+                           </td>
+                        </tr>
+                     </table>
+                  </td>
+               </tr>
+            <?php endif; ?>
+            <tr>
+               <td bgcolor="#ffffff" style="border-collapse: collapse;">
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           <br><u>Состав заказа:</u><br><br>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td bgcolor="#ffffff" style="border-collapse: collapse;">
+                  <table class="table-600 table-order mail-text" cellpadding="0" cellspacing="0" width="550" align="center" bgcolor="#ffffff" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-radius: 10px;border-top: 1px solid #9aff5a;border-right: 1px solid #9aff5a;border-left: 1px solid #9aff5a;display: block;padding: 0 10px;border-spacing: 7px 11px;font: 15px/20px Roboto, Arial, sans-serif;color: #222;">
+                     <?php foreach ($_SESSION['cart'] as $goods_id => $value) : ?>
+                        <tr style="border-bottom: 1px solid #9aff5a;">
+                           <td align="left" class="mail-tovname" width="300" style="border-collapse: collapse;padding: 10px 0;">
+                              <?= $value['tovName'] ?>
+                           </td>
+                           <td align="center" class="" width="150" style="border-collapse: collapse;padding: 10px 0;">
+                              <?= $value['pricerozn'] ?> руб. х <?= $value['qty'] ?> шт.
+                           </td>
+                           <td align="center" class="" width="100" style="border-collapse: collapse;padding: 10px 0;">
+                              <b><?= $value['pricerozn'] * $value['qty'] ?> руб.</b>
+                           </td>
+                        </tr>
+                     <?php endforeach; ?>
+                  </table>
+               </td>
+            </tr>
+
+            <tr>
+               <!-- отступ -->
+               <td height="10" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
+            </tr><!-- /отступ -->
+
+
+
+            <tr>
+               <td bgcolor="#ffffff" style="border-collapse: collapse;">
+                  <table class="table-600" cellpadding="0" cellspacing="0" width="550" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                     <tr>
+                        <td align="center" class="mail-title" width="450" style="border-collapse: collapse;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                           Общая стоимость заказа:
+                        </td>
+                        <td align="center" class="mail-title" width="100" style="border-collapse: collapse;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                           <b><?= $_SESSION['total_sum'] ?> руб.</b>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <!-- отступ -->
+               <td height="40" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
+            </tr><!-- /отступ -->
+
+            <tr>
+               <!-- отступ -->
+               <td height="20" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
+            </tr><!-- /отступ -->
          </table>
-      </td>
-   </tr>
-<?php endif; ?>
-<tr>
-   <td bgcolor="#ffffff" style="border-collapse: collapse;">
-      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-         <tr>
-            <td style="border-collapse: collapse;">
-               <br><u>Состав заказа:</u><br><br>
-            </td>
-         </tr>
-      </table>
-   </td>
-</tr>
-<tr>
-   <td bgcolor="#ffffff" style="border-collapse: collapse;">
-      <table class="table-600 table-order mail-text" cellpadding="0" cellspacing="0" width="550" align="center" bgcolor="#ffffff" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-radius: 10px;border-top: 1px solid #9aff5a;border-right: 1px solid #9aff5a;border-left: 1px solid #9aff5a;display: block;padding: 0 10px;border-spacing: 7px 11px;font: 15px/20px Roboto, Arial, sans-serif;color: #222;">
-         <?php foreach ($_SESSION['cart'] as $goods_id => $value) : ?>
-            <tr style="border-bottom: 1px solid #9aff5a;">
-               <td align="left" class="mail-tovname" width="300" style="border-collapse: collapse;padding: 10px 0;">
-                  <?= $value['tovName'] ?>
-               </td>
-               <td align="center" class="" width="150" style="border-collapse: collapse;padding: 10px 0;">
-                  <?= $value['pricerozn'] ?> руб. х <?= $value['qty'] ?> шт.
-               </td>
-               <td align="center" class="" width="100" style="border-collapse: collapse;padding: 10px 0;">
-                  <b><?= $value['pricerozn'] * $value['qty'] ?> руб.</b>
-               </td>
-            </tr>
-         <?php endforeach; ?>
-      </table>
-   </td>
-</tr>
-
-<tr>
-   <!-- отступ -->
-   <td height="10" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
-</tr><!-- /отступ -->
-
-
-
-<tr>
-   <td bgcolor="#ffffff" style="border-collapse: collapse;">
-      <table class="table-600" cellpadding="0" cellspacing="0" width="550" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-         <tr>
-            <td align="center" class="mail-title" width="450" style="border-collapse: collapse;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-               Общая стоимость заказа:
-            </td>
-            <td align="center" class="mail-title" width="100" style="border-collapse: collapse;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-               <b><?= $_SESSION['total_sum'] ?> руб.</b>
-            </td>
-         </tr>
-      </table>
-   </td>
-</tr>
-<tr>
-   <!-- отступ -->
-   <td height="40" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
-</tr><!-- /отступ -->
-
-<tr>
-   <!-- отступ -->
-   <td height="20" width="850" bgcolor="#ffffff" style="border-collapse: collapse;"></td>
-</tr><!-- /отступ -->
-</table>
 
 
 

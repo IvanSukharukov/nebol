@@ -119,7 +119,7 @@
                      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
                         <tr>
                            <td style="border-collapse: collapse;">
-                              Ваш заказ уже ждет Вас в аптеке по адресу: <b>пр.Просвещения, д.20/25</b><br>
+                              Ваш заказ уже ждет Вас в аптеке по адресу: <b><?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?></b><br>
                            </td>
                         </tr>
                      </table>
