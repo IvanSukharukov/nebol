@@ -22,6 +22,9 @@
                     <div class="contact_footer_mail"><a href="mailto:aneboleyka@mail.ru" target="_blank">aneboleyka@mail.ru</a></div>
                 </div>
             </div>
+            <div class="oferta">
+                Информация, содержащаяся на данном сайте, не является публичной офертой.
+            </div>
             <div class="copyright">
                 © <?= date("Y"); ?> Все права защищены.
             </div>

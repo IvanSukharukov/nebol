@@ -1388,7 +1388,12 @@ header {
 		font-weight: 600;
 	}
 
-
+.oferta {
+	text-align: center;
+	color: #555862;
+	font-style: italic;
+	font-size: 16px;
+}
 
 
 @media(max-width: 1100px) {
