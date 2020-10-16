@@ -734,6 +734,7 @@ header {
 		}
 		.btn-ost {
 			width: 170px;
+			white-space: nowrap;
 		}
 		.product_to_cart, .sum {
 			flex-basis: 10%;
@@ -1489,7 +1490,7 @@ select::-ms-expand {
           align-items: center;
   position: relative;
   /* min-width: 15ch; */
-  width: 200px;
+  /* width: 200px; */
   border: 1px solid var(--select-border);
   border-radius: 0.25em;
   padding: 0.25em 0.5em 0.25em 0.1em;
@@ -1569,7 +1570,6 @@ label {
 
 
 .address-product {
-	padding-left: 15px;
 	font-style: italic;
 }
 
@@ -1643,7 +1643,7 @@ label {
 
 @media(max-width: 950px) {
 	.address {
-		display: none;
+		/* display: none; */
 	}
 	.nav__link,
 	.phone {
@@ -1912,7 +1912,11 @@ label {
 	}
 	.search-text {
     	width: 170px;
-    }	
+	 }
+	.btn-ost {
+		width: 170px;
+		white-space: nowrap;
+	}
 }
 
 @media(max-width: 320px) {
