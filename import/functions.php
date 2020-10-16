@@ -299,15 +299,15 @@ function adress_aptek(){
  *Отправка письма с информацией об импорте
  */
 function mail_import() {
-    $query_count = "SELECT COUNT(1) FROM `ostbydate`";
+    $query_count = "SELECT COUNT(1) FROM `ostbydate_all`";
     $count_db = mysqli_query($GLOBALS['connection'], $query_count) or die(mysqli_error($GLOBALS['connection']));//сколько строк ПОСЛЕ ипорта
     $count_db = mysqli_fetch_assoc($count_db);
 
     $query_date = "SELECT `date_import` FROM `ostbydate` LIMIT 1";
-    $date_import = mysqli_query($GLOBALS['connection'], $query_date) or die(mysqli_error($GLOBALS['connection']));//сколько строк товаров
+    $date_import = mysqli_query($GLOBALS['connection'], $query_date) or die(mysqli_error($GLOBALS['connection']));//дата последнего импорта
     $date_import = mysqli_fetch_assoc($date_import);
     
-    $subject = "В таблице {$count_db['COUNT(1)']} строк, дата обновления {$date_import['date_import']}";
+    $subject = "{$count_db['COUNT(1)']} строк, дата {$date_import['date_import']}";
     echo $subject;
     
     $headers = "Content-type: text/plain; charset=utf-8\r\n";
