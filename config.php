@@ -7,23 +7,29 @@ defined("CATALOG") or die("Access denied");
 
 define("DBHOST", "localhost");
 
+//local
 define("DBUSER", "root");
 define("DBPASS", "root");
 define("DB", "apteka");//price_test
 define("PATH", "http://aptekanew2.loc/");
+define('ADMIN_EMAIL', 'iva2742@mail.ru');
 
+//production
 //define("DBUSER", "aneboltw_apt");
 //define("DBPASS", "Apt2025");//A!1234567
 //define("DB", "aneboltw_apt");
 //define("PATH", "http://aptekaneboleyka.ru/");
+//define('ADMIN_EMAIL', 'info@aptekaneboleyka.ru');
+
+//test_domain
+// define("DBUSER", "aneboltw_apttest");
+// define("DBPASS", "Apt2025"); //A!1234567
+// define("DB", "aneboltw_apttest");
+// define("PATH", "http://test.aneboltw.beget.tech/");
+//define('ADMIN_EMAIL', 'info@aptekaneboleyka.ru');
 
 
-
-//define("PATH", "http://aptekaneboleyka.ru/");
-
-//define('ADMIN_EMAIL', 'iva2742@mail.ru');
-define('ADMIN_EMAIL', 'info@aptekaneboleyka.ru');
-//define('ADMIN_EMAIL', 'admin@test.aneboltw.beget.tech');
+//define('ADMIN_EMAIL', 'info@test.aneboltw.beget.tech');
 
 define("PERPAGE", 10);
 
