@@ -12,6 +12,7 @@
             <form method="post" action="" class="product-cart">
                 <div class="product">
                     <div class="product_name"><?= $product['tovName'] ?></div>
+                    <div class="fabr address-product">Аптека: <?= $product['branch'] ?></div>
                     <div class="product_content">
                         <div class="fabr">Производитель: <?= $product['fabr'] ?></div>
                         <div class="ost">В наличии: <?= $product['ost'] ?> шт.</div>
@@ -40,7 +41,6 @@
                             <button type="submit" name="del-cart-product" class="del-cart-product">&times</button>
                         </div>
                     </div>
-                    <div class="fabr">Аптека: <?= $product['branch'] ?></div>
                 </div>
             </form>
 
@@ -53,7 +53,7 @@
                         <input type="submit" class="product_to_cart_btn delete-cart-btn" name="delete-cart" value="Очистить корзину" />
                     </div>
                     <!-- <div class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn"> -->
-                        <a href="<?= PATH ?>order/" alt="Оформить заказ" class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn">Оформить заказ</a>
+                    <a href="<?= PATH ?>order/" alt="Оформить заказ" class="product_to_cart_btn order-cart-btn btn_big_text del-order-btn">Оформить заказ</a>
                     <!-- </div> -->
                 </div>
 
