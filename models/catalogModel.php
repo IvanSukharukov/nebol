@@ -41,9 +41,14 @@ function getProducts($branch, $start_pos, $perpage)
 /**
  *Количество товаров
  */
-function countGoodsAllProduct()
+
+function countGoodsAllProduct($branch)
 {
-    $query = 'SELECT COUNT(*) FROM ostbydate_all';
+    if ($branch === 1) {
+        $query = 'SELECT COUNT(DISTINCT tovName) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid';
+    } else {
+        $query = "SELECT COUNT(DISTINCT tovName) FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE branches.branch_main_id = {$branch}";
+    }
     $res = mysqli_query($GLOBALS['connection'], $query);
     $count_goods = mysqli_fetch_row($res);
     return $count_goods['0'];

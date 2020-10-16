@@ -305,8 +305,10 @@ function do_group_products($arr)
 function replace_tovName_with_key($arr)
 {
     $replace_arr_key = [];
-    foreach ($arr as $value) {
-        $replace_arr_key[] = $value;
+    if (is_array($arr)) {
+        foreach ($arr as $value) {
+            $replace_arr_key[] = $value;
+        }
     }
     return $replace_arr_key;
 }
