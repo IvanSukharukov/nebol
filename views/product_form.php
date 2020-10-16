@@ -17,7 +17,9 @@
                 <input type="hidden" name="branchid" value="<?= $product['branchid'] ?>">
                 <input type="hidden" name="pricerozn" value="<?= $product['pricerozn'] ?>">
                 <input type="hidden" name="ost" value="<?= $product['ost'] ?>">
-                <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id="cartfix">В корзину</button>
+                <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id="">В корзину</button>
+                
+                <!-- <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id=""><?php //if (empty($_SESSIN['cart'])) echo "<a href=\"#zatemnenie\">" ?>В корзину<?php //if (empty($_SESSIN['cart'])) echo "</a>" ?></button> -->
             </div>
         </div>
         <div class="fabr">Аптека: <?= $product['branch'] ?></div>

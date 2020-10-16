@@ -116,4 +116,3 @@ $(document).ready(function () {
 		window.location = location.href;
 	});
 });
-
