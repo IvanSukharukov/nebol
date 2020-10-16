@@ -37,6 +37,8 @@
                 <div class="order_details__title">Примечание:</div>
                 <textarea id="no-enter" name="prim"><?= $_SESSION['order']['prim'] ?></textarea>
             </div>
+            <div class="prim-order">Если Вы не нашли нужный препарат в выбранной аптеке, попробуйте выполнить поиск по всем аптекам.
+            </div>
             <div class="personal-data">
                 <input type="checkbox" required checked> Я согласен на <a href="<?= PATH ?>page/policy/">обработку персональных данных</a>
             </div>

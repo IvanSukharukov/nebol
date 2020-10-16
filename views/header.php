@@ -87,7 +87,7 @@
 
                     <div>
                         <div class="address-current<?php if (!empty($_SESSION['cart'])) echo ' address-current-view'; ?>" data-title="Чтобы сменить аптеку очистите корзину">
-                            Аптека для заказа:<br> <?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?>
+                            <span>Аптека для заказа:</span><br> <?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?>
                         </div>
                     </div>
 

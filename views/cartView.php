@@ -47,7 +47,7 @@
             <?endforeach;?>
             <form method="post" action="" class="product-cart-all">
                 <div class="total_sum">Общая сумма заказа: <?= trim_zero($_SESSION['total_sum']) ?> &#8381</div>
-
+                <div class="prim-cart">Если Вы не нашли нужный препарат в выбранной аптеке, попробуйте выполнить поиск по всем аптекам.</div>
                 <div class="del-order">
                     <div class="del-order-btn">
                         <input type="submit" class="product_to_cart_btn delete-cart-btn" name="delete-cart" value="Очистить корзину" />
