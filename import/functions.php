@@ -221,9 +221,9 @@ function write_db_OstByDate($ost_arr){
 }
 
 /**
- *Записать товары в таблицу НЕ обработанный массив
+ *Записать товары в таблицу НЕ обработанный массив Сашиной аптеки
  */
-function write_db_OstByDate_all($ost_arr)
+function write_db_OstByDate_9117($ost_arr)
 {
     //del_db_ostbydate();
     //global $ost_arr;
@@ -231,7 +231,7 @@ function write_db_OstByDate_all($ost_arr)
     global $connection;
     if ($ost_arr) {
         //удалить все данные из таблицы перед добавлением. Вероятно логичнее сделать обновление.
-        $query = "DELETE FROM `ostbydate`";
+        $query = "DELETE FROM `ostbydate_all`";
         mysqli_query($connection, $query);
         for ($i = 0; ($i < count($ost_arr['items'])); $i++) {
             $branchId = (int) $ost_arr['items'][$i]['branchId'];
@@ -243,9 +243,42 @@ function write_db_OstByDate_all($ost_arr)
             $priceRoznWNDS = (float)$ost_arr['items'][$i]['priceRoznWNDS'];
             $recipe = (int)$ost_arr['items'][$i]['recipe'];
             if ($branchId == 9117) {
-                $query = "INSERT INTO ostbydate (`branchid`,`regid`,`tovName`,`alias`,`fabr`,`ost`,`pricerozn`,`recipe`) VALUES ('$branchId', '$regId', '$tovName', '$alias','$fabr', '$uQntOst', '$priceRoznWNDS', '$recipe')";
+                $query = "INSERT INTO ostbydate_all (`branchid`,`regid`,`tovName`,`alias`,`fabr`,`ost`,`pricerozn`,`recipe`) VALUES ('$branchId', '$regId', '$tovName', '$alias','$fabr', '$uQntOst', '$priceRoznWNDS', '$recipe')";
                 mysqli_query($connection, $query) or die(mysqli_error($connection));
             }
+        }
+    } else {
+        mail_error('массив $ost_arr пуст, данные не обновлялись');
+        die;
+    }
+}
+
+
+/**
+ *Записать товары в таблицу НЕ обработанный массив Сашиной аптеки
+ */
+function write_db_OstByDate_all($ost_arr)
+{
+    //del_db_ostbydate();
+    //global $ost_arr;
+    //print_arr($ost_arr);
+    global $connection;
+    if ($ost_arr) {
+        //удалить все данные из таблицы перед добавлением. Вероятно логичнее сделать обновление.
+        $query = "DELETE FROM `ostbydate_all`";
+        mysqli_query($connection, $query);
+        for ($i = 0; ($i < count($ost_arr['items'])); $i++) {
+            $branchId = (int) $ost_arr['items'][$i]['branchId'];
+            $regId = (int)$ost_arr['items'][$i]['regId'];
+            $tovName = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['tovName']);
+            $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
+            $fabr = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['fabr']);
+            $uQntOst = (int)$ost_arr['items'][$i]['uQntOst'];
+            $priceRoznWNDS = (float)$ost_arr['items'][$i]['priceRoznWNDS'];
+            $recipe = (int)$ost_arr['items'][$i]['recipe'];
+            $query = "INSERT INTO ostbydate_all (`branchid`,`regid`,`tovName`,`alias`,`fabr`,`ost`,`pricerozn`,`recipe`) VALUES ('$branchId', '$regId', '$tovName', '$alias','$fabr', '$uQntOst', '$priceRoznWNDS', '$recipe')";
+            mysqli_query($connection, $query) or die(mysqli_error($connection));
+            
         }
     } else {
         mail_error('массив $ost_arr пуст, данные не обновлялись');

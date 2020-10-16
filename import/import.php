@@ -12,8 +12,10 @@ $start = microtime(true);
 
 auth();
 //$ost_arr = ostByDate();
-$ost_arr = ostByDate_file_get_contents_curl(); //получить все препараты
-write_db_OstByDate_all($ost_arr); //записать все препараты
+$ost_arr = ostByDate_file_get_contents_curl(); //получить препараты (зависит от parentId)
+write_db_OstByDate_9117($ost_arr); //записать все всех аптек препараты
+
+
 //$ost_arr = min_price_one_product($ost_arr);//обработать остатки, получить минимальные цены
 //write_db_OstByDate($ost_arr);//записать минимальные цены
 mail_import();
