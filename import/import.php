@@ -13,7 +13,8 @@ $start = microtime(true);
 auth();
 //$ost_arr = ostByDate();
 $ost_arr = ostByDate_file_get_contents_curl(); //получить препараты (зависит от parentId)
-write_db_OstByDate_9117($ost_arr); //записать все всех аптек препараты
+//write_db_OstByDate_9117($ost_arr); //записать все препараты Сашиной аптеки
+write_db_OstByDate_all($ost_arr); //записать все препараты всех аптек
 
 
 //$ost_arr = min_price_one_product($ost_arr);//обработать остатки, получить минимальные цены

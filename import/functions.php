@@ -255,7 +255,7 @@ function write_db_OstByDate_9117($ost_arr)
 
 
 /**
- *Записать товары в таблицу НЕ обработанный массив Сашиной аптеки
+ *Записать товары в таблицу НЕ обработанный массив ВСЕХ АПТЕК
  */
 function write_db_OstByDate_all($ost_arr)
 {
@@ -336,7 +336,7 @@ function mail_import() {
     $count_db = mysqli_query($GLOBALS['connection'], $query_count) or die(mysqli_error($GLOBALS['connection']));//сколько строк ПОСЛЕ ипорта
     $count_db = mysqli_fetch_assoc($count_db);
 
-    $query_date = "SELECT `date_import` FROM `ostbydate` LIMIT 1";
+    $query_date = "SELECT `date_import` FROM `ostbydate_all` LIMIT 1";
     $date_import = mysqli_query($GLOBALS['connection'], $query_date) or die(mysqli_error($GLOBALS['connection']));//дата последнего импорта
     $date_import = mysqli_fetch_assoc($date_import);
     
