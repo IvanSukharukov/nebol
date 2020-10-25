@@ -276,7 +276,8 @@ function write_db_OstByDate_all($ost_arr)
             $uQntOst = (int)$ost_arr['items'][$i]['uQntOst'];
             $priceRoznWNDS = (float)$ost_arr['items'][$i]['priceRoznWNDS'];
             $recipe = (int)$ost_arr['items'][$i]['recipe'];
-            $query = "INSERT INTO ostbydate_all (`branchid`,`regid`,`tovName`,`alias`,`fabr`,`ost`,`pricerozn`,`recipe`) VALUES ('$branchId', '$regId', '$tovName', '$alias','$fabr', '$uQntOst', '$priceRoznWNDS', '$recipe')";
+            $srokg = $ost_arr['items'][$i]['srokG'];
+            $query = "INSERT INTO ostbydate_all (`branchid`,`regid`,`tovName`,`alias`,`fabr`,`ost`,`pricerozn`,`recipe`,`srokg`) VALUES ('$branchId', '$regId', '$tovName', '$alias','$fabr', '$uQntOst', '$priceRoznWNDS', '$recipe', '$srokg')";
             mysqli_query($connection, $query) or die(mysqli_error($connection));
             
         }
