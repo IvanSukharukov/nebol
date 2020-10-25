@@ -5,9 +5,6 @@ error_reporting(E_ALL);
 require_once '../config.php';
 require_once '003ms_functions.php';
 
-
-//print_arr(write_txt_file()); //записать данные в txt
 write_txt_file();
 zip_file(); //заархивировать
 send_mail_to_003();//отправить письмо в 003ms
-//report_mail();//отчет-письмо

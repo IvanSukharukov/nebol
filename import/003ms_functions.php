@@ -18,7 +18,6 @@ function print_arr($array, $arrName = '')
    echo "<pre>" . print_r($array, true) . "</pre>";
 }
 
-print_arr(PATH,'');
 /**
  *записать данные в txt
  */
@@ -53,11 +52,6 @@ function write_txt_file(){
    fclose($fp);
 }
 
-
-
-
-
-
 /**
  *заархивировать
  */
@@ -73,49 +67,16 @@ function zip_file(){
  *отправить письмо в 003ms
  */
 function send_mail_to_003() {
-    $mail = new PHPMailer();
-
-   //var_dump($mail);
-
-   //$mail->setFrom(ADMIN_EMAIL, 'Apteka Neboleyka');
+   $mail = new PHPMailer();
    $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?=');
-   $mail->addAddress('iva2742@mail.ru', 'John Doe');
+   $mail->addAddress('iva2742@mail.ru', 'John');
+   $mail->addAddress('iva2742@yandex.ru', 'John2');//если так слать на два адреса, то оба видят друг друга
    $mail->Subject = 'apteka_neboleyka_price';
-   $mail->msgHTML(" ");
-   // Attach uploaded files
-   $mail->addAttachment('apteka_neboleyka_price.zip');
-   //$r = $mail->send();
-
-   if (!$mail->send()) {
-      echo 'Mailer Error: ' . $mail->ErrorInfo;
-   } else {
-      echo 'Message sent!'; 
-   }
-
-
-   
+   $mail->msgHTML(" ");//текст в письме
+   $mail->addAttachment('apteka_neboleyka_price.zip'); //вложение
+   $mail->send(); 
 }
 
-
-/**
- *отправить письмо в 003ms
- */
-function send_mail_to_003_test(){
-   $subject = "apteka_neboleyka_price";
-   // заголовки
-   $headers = "Content-type: text/html; charset=utf-8\r\n";
-   $headers .= "From: Аптека Неболейка <" . ADMIN_EMAIL . ">\r\n";
-
-
-   $fp = fopen('apteka_neboleyka_price.zip', "r");
-   $path = 'apteka_neboleyka_price.zip';
-   $file = fread($fp, filesize($path));
-   fclose($fp);
-
-   $mail_body = chunk_split(base64_encode($file));
-
-   mail('iva2742@mail.ru', $subject, $mail_body, $headers);
-}
 
 /**
  *отчет-письмо
