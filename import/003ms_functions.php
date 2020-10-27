@@ -3,20 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 
 require 'phpmailer/src/PHPMailer.php';
-/**
- * Распечатка массива/переменной
- * @param $array array
- * @param string $arrName
- */
-function print_arr($array, $arrName = '')
-{
-   $info = debug_backtrace();
-   echo "Имя масива/переменной: <b>" . $arrName . "</b><br>";
-   //echo ("Имя масива: " . $info[0]['args'][1] . '<br>');//возможно где-то работать не будет, использовать код выше
-   echo ("Файл: " . $info[0]['file'] . '<br>');
-   echo ("Строка распечатки: <b>" . $info[0]['line'] . "</b><br>");
-   echo "<pre>" . print_r($array, true) . "</pre>";
-}
+require 'functions.php';
+
 
 /**
  *записать данные в txt
@@ -30,16 +18,37 @@ function write_txt_file(){
    while ($row = mysqli_fetch_assoc($result_sql_price_003ms)) {
       $price_003ms[] = $row;
    }
+   $price_003ms = min_price_one_product_003ms($price_003ms);//оставить только 1 товар по мин.цене(чтобы товары не повторялись)
 
    //записать полученный массив в txt
    $fp = fopen('apteka_neboleyka_price.txt', 'w');
+   $field_description = 'PREPARAT' . '|' . 'PROIZV' . '|' . 'CENA' . '|' .  'HREF';
+   fwrite($fp, $field_description . "\r\n");
+   foreach ($price_003ms as $product) {
+      $preparat = "{$product['tovName']}";
+      $proizv = "{$product['fabr']}";
+      $cena = "{$product['pricerozn']}";
+      $href = PATH . "product/" . "{$product['alias']}";
+      $data = $preparat . '|' . $proizv . '|' . $cena . '|' . $href;
+      fwrite($fp, $data . "\r\n");
+   }
+   fwrite($fp, "\n");
+   fclose($fp);
+
+
+
+//удалить после запуска в 003ms на постоянку
+/*    //записать полученный массив в txt
+   $fp = fopen('apteka_neboleyka_price.txt',
+      'w'
+   );
    $field_description = 'TYP' . '|' . 'APTEKA' . '|' . 'PREPARAT' . '|' . 'PROIZV' . '|' . 'STRANA' . '|' . 'CENA' . '|' . 'OST' . '|' . 'SROK' . '|' . 'HREF';
    fwrite($fp, $field_description . "\r\n");
    foreach ($price_003ms as $product) {
       $typ = "остатки";
-      $apteka = "{$product['branch']}";//!
+      $apteka = "{$product['branch']}"; //!
       $preparat = "{$product['tovName']}";
-      $proizv = "{$product['fabr']}";//!производитель и страна в одном поле, может обрезать?
+      $proizv = "{$product['fabr']}"; //!производитель и страна в одном поле, может обрезать?
       $strana = "";
       $cena = "{$product['pricerozn']}";
       $ost = "{$product['ost']}";
@@ -49,7 +58,7 @@ function write_txt_file(){
       fwrite($fp, $data . "\r\n");
    }
    fwrite($fp, "\n");
-   fclose($fp);
+   fclose($fp); */
 }
 
 /**

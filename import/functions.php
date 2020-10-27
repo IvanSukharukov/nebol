@@ -389,7 +389,7 @@ $accesses[2]['password']= '5uQwDTkt';*/
 
 
 /**
- * Минимальная цена у конкретного наименования (продукта)
+ * Минимальная цена у конкретного наименования (продукта) для сайта
  * @param $arr array входящий массив (необработанный)
  * @return array обработанный массив
  */
@@ -408,6 +408,33 @@ function min_price_one_product($arr){
             }
         }else{
             array_push($result, $arr['items'][$i]);
+        }
+    }
+    return $result;
+}
+
+/**
+ * 003ms
+ * Минимальная цена у конкретного наименования (продукта) для сайта
+ * @param $arr array входящий массив (необработанный)
+ * @return array обработанный массив
+ */
+function min_price_one_product_003ms($arr)
+{
+    $result = [];
+    for ($i = 0; $i < count($arr); $i++) {
+        //в эту переменную записываем ключ найденного товара,
+        // array_column - ищем по колонке названия товара, возможно поиск по полю regId будет быстрее
+        $key_tovName = array_search($arr[$i]['tovName'], array_column($result, 'tovName'));
+        if ($key_tovName !== false) { //если ключа нет, т.е. товар не найден, то записать
+            //если товар есть, то сравнить цену и обновить, если в результирующем массиве цена больше
+            if ($arr[$i]['pricerozn'] <= $result[$key_tovName]['pricerozn']) {
+                $result[$key_tovName]['pricerozn'] = $arr[$i]['pricerozn'];
+                //если нужно будет учитывать общее количество, а не только товара у которого мин.цена
+                //$result[$key_tovName]['ost'] += $arr['items'][$i]['ost'];
+            }
+        } else {
+            array_push($result, $arr[$i]);
         }
     }
     return $result;
