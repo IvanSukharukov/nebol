@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="<?= PATH ?>views/cupertino/jquery-ui-1.10.4.custom.css">
     <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/slick/slick-theme.css" />
-    <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/css/style_v1.css">
+    <link rel="stylesheet" type="text/css" href="<?= PATH ?>views/css/style_v2_1.css">
 
     <title>Аптека Неболейка</title>
 
