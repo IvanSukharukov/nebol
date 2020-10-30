@@ -77,19 +77,11 @@ function zip_file(){
  */
 function send_mail_to_003() {
    $mail = new PHPMailer();
-   $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?=');
+   $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка для 003') . '?=');
    $mail->addAddress('iva2742@mail.ru', 'John');
-   $mail->addAddress('iva2742@yandex.ru', 'John2');//если так слать на два адреса, то оба видят друг друга
+   $mail->addAddress('auto@003.ms', 'auto003');//если так слать на два адреса, то оба видят друг друга
    $mail->Subject = 'apteka_neboleyka_price';
    $mail->msgHTML(" ");//текст в письме
    $mail->addAttachment('apteka_neboleyka_price.zip'); //вложение
    $mail->send(); 
-}
-
-
-/**
- *отчет-письмо
- */
-function report_mail(){
-
 }
