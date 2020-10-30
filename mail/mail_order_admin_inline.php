@@ -174,6 +174,7 @@
                </td>
             </tr>
 
+
             <?php if (!empty($_SESSION['order']['prim'])) : ?>
                <tr>
                   <td style="border-collapse: collapse;">
@@ -187,6 +188,18 @@
                   </td>
                </tr>
             <?php endif; ?>
+            <tr>
+               <td style="border-collapse: collapse;">
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           Общая стоимость заказа: <b><?= $_SESSION['total_sum'] ?> руб.</b><br>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+
             <tr>
                <td bgcolor="#ffffff" style="border-collapse: collapse;">
                   <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
