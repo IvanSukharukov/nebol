@@ -6,7 +6,13 @@ include "models/{$view}Model.php";
 
 //получение одного продукта
 
-$product = get_one_product($product_alias, $branch);//alias присваивается в регулярном выражении в import.php
+$product = get_one_product($product_alias, $branch); //alias присваивается в регулярном выражении в import.php
+
+if (empty($product)) {
+   header("HTTP/1.1 404 Not Found");
+   include 'views/404View.php';
+   exit;
+}
 
 /*//обращение по id
 $product_id = $_GET['product'];

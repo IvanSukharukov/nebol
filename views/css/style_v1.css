@@ -31,6 +31,24 @@ body{
 	margin: 0;
 }
 
+
+.not404 {
+	margin: 20px;
+	text-align: center;
+	font-size: 24px;
+	line-height: 50px;
+}
+
+.search404 {
+	margin: 50px;
+	max-width: 70%;
+	margin: 0 auto;
+}
+
+.search404 .search_text {
+	width: 320px;
+}
+
 /*Пагинация*/
 .pagination{
 	margin: 10px;
