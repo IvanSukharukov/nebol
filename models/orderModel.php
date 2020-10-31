@@ -142,7 +142,7 @@ function mail_order($order_id, $email){
     require 'mail/mail_order_admin_inline.php'; // подключаем шаблон письма
     $mail_body = ob_get_clean(); // выгружаем письмо из буфера
     //получить все аптеки
-    $branches = getBranches();
+    
     //print_arr($GLOBALS['branch'],'');
     //print_arr($GLOBALS['branches'],'');
 
