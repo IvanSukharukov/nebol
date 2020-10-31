@@ -141,5 +141,18 @@ function mail_order($order_id, $email){
     ob_start(); // включаем буферизацию
     require 'mail/mail_order_admin_inline.php'; // подключаем шаблон письма
     $mail_body = ob_get_clean(); // выгружаем письмо из буфера
-    mail('aneboleyka@mail.ru', $subject, $mail_body, $headers);//возможно стоит указать настоящий email админа жестко
+    //получить все аптеки
+    $branches = getBranches();
+    //print_arr($GLOBALS['branch'],'');
+    //print_arr($GLOBALS['branches'],'');
+
+    $key_apteka_order = array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branch_main_id'));
+
+    $mail_apteka_order = $GLOBALS['branches'][$key_apteka_order]['email'];
+
+    //print_arr($mail_apteka_order, '$mail_apteka_order ');
+
+    //mail('aneboleyka@mail.ru', $subject, $mail_body, $headers);//возможно стоит указать настоящий email админа жестко
+   
+    mail($mail_apteka_order, $subject, $mail_body, $headers);
 }

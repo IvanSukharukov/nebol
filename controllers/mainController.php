@@ -27,7 +27,7 @@ if (!empty(current($_SESSION['cart']))) {
     $branch = get_branch_main_id(current($_SESSION['cart'])['branchid']);
 }
 
-//все аптеки, маркировка из списка отсекается
+//все аптеки
 $branches = getBranches();
 
 
