@@ -262,11 +262,11 @@ function total_quantity()
 
 
 /**
- *Получить филиалы, маркировка отсекается
+ *Получить все филиалы
  */
 function getBranches()
 {
-    $query = "SELECT * FROM `branches` WHERE `branchId`=`branch_main_id`";
+    $query = "SELECT * FROM `branches`";
     $rs = mysqli_query($GLOBALS['connection'], $query);
     $result_getBranches = [];
     while ($row = mysqli_fetch_assoc($rs)) {
@@ -274,6 +274,40 @@ function getBranches()
     }
     return $result_getBranches;
 }
+
+
+/**
+ *Отсечь филиалы с маркировкой для отображения в header
+ */
+function not_mark_branches($branches)
+{
+    $result = [];
+    for ($i = 0; $i < count($branches); $i++) {
+        $key_branch = array_search($branches[$i]['branch_main_id'], array_column($result, 'branch_main_id'));
+        if ($key_branch == false) {
+            array_push($result, $branches[$i]);
+            
+        }
+    }
+    return $result;
+}
+
+
+
+/**
+ *Получить branch_main_id (на случай, если был выбран филиал маркировки)
+ */
+function get_branch_main_id($branch)
+{
+    $query = "SELECT * FROM `branches` WHERE `branchid`='{$branch}'";
+
+    $res = mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
+
+    $row = mysqli_fetch_assoc($res);
+
+    return $row['branch_main_id'];
+}
+
 
 
 /**

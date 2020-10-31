@@ -55,8 +55,15 @@ if (empty($match)) {
 extract($match);
 
 //записать выбранную аптеку (выбор либо через select, либо $branch перезаписывается на id аптеки первого добавленного товара)
-
-$branch = (int)$_COOKIE['branch'] ? (int)$_COOKIE['branch'] : BRANCH;
+//$branch = (int)$_COOKIE['branch'] ? (int)$_COOKIE['branch'] : BRANCH;//работало некорректно
+//$branch и $branchid; $branch - цифровой код аптеки для каталога, поиска, показа отдельного товара и т.д.; $branchid - id аптеки для добавления конкретного товара в корзину
+if ((int)$_COOKIE['branch']) {
+    $branch = (int)$_COOKIE['branch'];
+} elseif (current($_SESSION['cart'])['branchid']) {
+    $branch = current($_SESSION['cart'])['branchid'];
+} else {
+    $branch = BRANCH;
+}
 
 //повились следующие переменные
 //$product_alias - alias продукта

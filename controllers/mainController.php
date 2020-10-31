@@ -4,7 +4,7 @@ include 'config.php';
 include 'models/mainModel.php';
 //require_once 'models/productModel.php';
 
-$branchid = 1;
+//$branchid = 1;
 if (isset($_POST['addtocart'])) {
     $regid = abs((int)$_POST['regid']);
     $qty = abs((int)$_POST['qty']);
@@ -23,8 +23,14 @@ if (isset($_POST['addtocart'])) {
 //записать в $_COOKIE['branch'] id аптеки первого добавленного товара
 if (!empty(current($_SESSION['cart']))) {
     // $_COOKIE['branch'] = current($_SESSION['cart'])['branchid'];
-    $branch = current($_SESSION['cart'])['branchid'];
+    //получить id главной аптеки (на случай маркировки)
+    $branch = get_branch_main_id(current($_SESSION['cart'])['branchid']);
 }
 
 //все аптеки, маркировка из списка отсекается
 $branches = getBranches();
+
+
+//print_arr($branches, '$branches');
+//print_arr($branch, '$branch');
+//print_arr($_COOKIE['branch'], '$_COOKIE');

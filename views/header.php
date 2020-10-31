@@ -100,7 +100,7 @@
                             <select name="branch" id="branch">
                                 <option <?php if ($branch == 1) echo "selected"; ?> value="1">Аптека не выбрана</option>
 
-                                <?php foreach ($branches as $branch_option) : ?>
+                                <?php foreach (not_mark_branches($branches) as $branch_option) : ?>
                                     <option <?php if ($branch == $branch_option['branch_main_id']) echo "selected"; ?> value="<?= $branch_option['branch_main_id'] ?>"><?= $branch_option['address'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -110,7 +110,7 @@
 
                     <div>
                         <div class="address-current<?php if (!empty($_SESSION['cart'])) echo ' address-current-view'; ?>" data-title="Чтобы сменить аптеку очистите корзину">
-                            <span>Аптека для заказа:</span><br> <?= $branches[array_search($branch, array_column($branches, 'branch_main_id'))]['address'] ?>
+                            <span>Аптека для заказа:</span><br> <?= $branches[array_search($branch, array_column($branches, 'branchId'))]['address'] ?>
                         </div>
                     </div>
 

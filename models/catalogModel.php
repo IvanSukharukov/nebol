@@ -17,6 +17,10 @@ function getProducts($branch, $start_pos, $perpage)
     } else {
         //показать препараты выбранной аптеки
         //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE ostbydate_all.branchid = $branch LIMIT $start_pos, $perpage";
+
+
+        //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE branches.branch_main_id = $branch LIMIT $start_pos, $perpage";//!
+
         $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE branches.branch_main_id = $branch LIMIT $start_pos, $perpage";
 
         //получить препараты по двум branchid (маркировка и обычные)
