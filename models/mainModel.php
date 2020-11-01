@@ -282,13 +282,13 @@ function getBranches()
 function not_mark_branches($branches)
 {
     $result = [];
+    
     for ($i = 0; $i < count($branches); $i++) {
-        $key_branch = array_search($branches[$i]['branch_main_id'], array_column($result, 'branch_main_id'));
-        if ($key_branch == false) {
+        if ($branches[$i]['branchId'] == $branches[$i]['branch_main_id']) {
             array_push($result, $branches[$i]);
-            
         }
     }
+
     return $result;
 }
 
