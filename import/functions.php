@@ -269,6 +269,9 @@ function write_db_OstByDate_all($ost_arr)
         mysqli_query($connection, $query);
         for ($i = 0; ($i < count($ost_arr['items'])); $i++) {
             $branchId = (int) $ost_arr['items'][$i]['branchId'];
+            if ($branchId == 8863 || $branchId == 13826) {//Приладожский
+                continue;
+            }
             $regId = (int)$ost_arr['items'][$i]['regId'];
             $tovName = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['tovName']);
             $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
