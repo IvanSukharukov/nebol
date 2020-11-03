@@ -335,13 +335,17 @@ header {
 	line-height: 25px;
 }
 .phone {
-	font-size: 22px;
-	font-weight: bold;
-	line-height: 50px;
+	font-size: 18px;
+	/* font-weight: bold; */
+	line-height: 25px;
 }
 	.phone a {
 		color: #222;
 	}
+.sprav {
+	font-size: 15px;
+	font-weight: normal;
+}	
 .header_cart {
     display: flex;
     margin-top: 12px;
@@ -1508,7 +1512,7 @@ select::-ms-expand {
           align-items: center;
   position: relative;
   /* min-width: 15ch; */
-  /* width: 200px; */
+  width: 189px;
   border: 1px solid var(--select-border);
   border-radius: 0.25em;
   padding: 0.25em 0.5em 0.25em 0.1em;
@@ -1592,7 +1596,9 @@ label {
 }
 
 
-
+#branch {
+	padding-left: 3px;
+}
 
 
 

@@ -50,7 +50,7 @@
         <div><img src="https://mc.yandex.ru/watch/49344637" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
-    
+
 </head>
 
 <body>
@@ -106,16 +106,23 @@
                             </select>
                             <span class="focus"></span>
                         </div>
+                        <?php if($branch !== 1) : ?>
+                            <div><b><?= $branches[array_search($branch, array_column($branches, 'branchId'))]['phone'] ?></b></div>
+                        <?php endif; ?>    
                     </div>
 
                     <div>
                         <div class="address-current<?php if (!empty($_SESSION['cart'])) echo ' address-current-view'; ?>" data-title="Чтобы сменить аптеку очистите корзину">
                             <span>Аптека для заказа:</span><br> <?= $branches[array_search($branch, array_column($branches, 'branchId'))]['address'] ?>
+                            <div><b><?= $branches[array_search($branch, array_column($branches, 'branchId'))]['phone'] ?></b></div>
                         </div>
                     </div>
 
 
-                    <div class="phone"><a href="tel:+78122421872">+7 (812) 242-18-72</a></div>
+                    <div class="phone">
+                        <div class="sprav"><span>Справочная:</span></div>
+                        <a href="tel:+78122421872">+7 (812) 242-18-72</a>
+                    </div>
 
                     <div class="header_cart">
                         <?php //if(isset($_SESSION['total_quantity']))://если скрывать пустую корзину
