@@ -262,11 +262,11 @@ function total_quantity()
 
 
 /**
- *Получить все филиалы
+ *Получить все филиалы, у которых visible = 1
  */
 function getBranches()
 {
-    $query = "SELECT * FROM `branches`";
+    $query = "SELECT * FROM `branches` WHERE `visible` = 1";
     $rs = mysqli_query($GLOBALS['connection'], $query);
     $result_getBranches = [];
     while ($row = mysqli_fetch_assoc($rs)) {
