@@ -54,6 +54,9 @@
 </head>
 
 <body>
+    <div class="hot-demand">
+        В период повышенного спроса на лекарственные препараты, уточняйте наличие препаратов по телефону.
+    </div>
     <header class="header">
         <div class="container">
             <div class="header__row">
@@ -106,9 +109,9 @@
                             </select>
                             <span class="focus"></span>
                         </div>
-                        <?php if($branch !== 1) : ?>
+                        <?php if ($branch !== 1) : ?>
                             <div><b><?= $branches[array_search($branch, array_column($branches, 'branchId'))]['phone'] ?></b></div>
-                        <?php endif; ?>    
+                        <?php endif; ?>
                     </div>
 
                     <div>

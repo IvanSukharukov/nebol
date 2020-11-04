@@ -209,7 +209,11 @@ header {
 
 
 
-
+.hot-demand {
+	background-color: #d5f1d7;
+   border: 1px solid #fba8ab;
+   text-align: center;
+}
 
 
 /* --------------- Mobile navigation button ----------- */
