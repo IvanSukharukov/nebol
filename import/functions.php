@@ -255,7 +255,7 @@ function write_db_OstByDate_9117($ost_arr)
 
 
 /**
- *Записать товары в таблицу НЕ обработанный массив ВСЕХ АПТЕК
+ *Записать товары в таблицу НЕ обработанный массив ВСЕХ АПТЕК (исключить Приладожский)
  */
 function write_db_OstByDate_all($ost_arr)
 {
@@ -269,7 +269,7 @@ function write_db_OstByDate_all($ost_arr)
         mysqli_query($connection, $query);
         for ($i = 0; ($i < count($ost_arr['items'])); $i++) {
             $branchId = (int) $ost_arr['items'][$i]['branchId'];
-            if ($branchId == 8863 || $branchId == 13826) {//Приладожский
+            if ($branchId == 8863 || $branchId == 13826) {//Приладожский исключен
                 continue;
             }
             $regId = (int)$ost_arr['items'][$i]['regId'];
@@ -277,6 +277,9 @@ function write_db_OstByDate_all($ost_arr)
             $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
             $fabr = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['fabr']);
             $uQntOst = (int)$ost_arr['items'][$i]['uQntOst'];
+            if ($uQntOst == 0) {
+                continue;
+            }
             $priceRoznWNDS = (float)$ost_arr['items'][$i]['priceRoznWNDS'];
             $recipe = (int)$ost_arr['items'][$i]['recipe'];
             $srokg = $ost_arr['items'][$i]['srokG'];
