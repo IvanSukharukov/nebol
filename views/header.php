@@ -54,7 +54,7 @@
 </head>
 
 <body>
-    <div class="hot-demand">
+    <div class="hot-demand" id="blink">
         В период повышенного спроса на лекарственные препараты, уточняйте наличие препаратов по телефону.
     </div>
     <header class="header">
