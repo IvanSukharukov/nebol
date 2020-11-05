@@ -226,7 +226,9 @@ header {
   -webkit-animation: pulsate 1.2s linear infinite;
   animation: pulsate 1.2s linear infinite;
 }
-
+.red {
+	color: #ed1c24;
+}
 
 /* --------------- Mobile navigation button ----------- */
 

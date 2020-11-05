@@ -115,7 +115,8 @@ function save_order($customer_id, $dostavka_id, $prim){
     $_SESSION['order']['res'] = "<div class='order-success'>Ваш <span>заказ №{$order_id}</span> принят!<br> Данные о заказе отправлены на e-mail, указанный при оформлении.<br>
     Аптека заказа: <span>{$GLOBALS['branches'][array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branchId'))]['address']}</span><br>
     Телефон аптеки: <span>{$GLOBALS['branches'][array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branchId'))]['phone']}</span><br>
-    <br>Спасибо за Ваш заказ.</div>";
+    <span class='red'>Наличие заказанных препаратов не гарантируется.</span><br>
+    <br>Спасибо за Ваш заказ.<br></div>";
     return true;
 }
 
