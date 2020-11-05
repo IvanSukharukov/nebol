@@ -274,7 +274,13 @@ function write_db_OstByDate_all($ost_arr)
             }
             $regId = (int)$ost_arr['items'][$i]['regId'];
             $tovName = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['tovName']);
-            if ($tovName == 'Левофлоксацин таб. п/пл. об. 500мг №10') {
+            if ($tovName == 'Левофлоксацин таб. п/пл. об. 500мг №10' ||
+                $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №1 (пач.карт.)' ||
+                $tovName == 'Цефтриаксон фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №1 пач.карт.' ||
+                $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 2г №1 (пач.карт.)' ||
+                $tovName == 'Цефтриаксон фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №50' ||
+                $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №50'
+                ) {
                 continue;
             }
             $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
