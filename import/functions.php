@@ -274,6 +274,9 @@ function write_db_OstByDate_all($ost_arr)
             }
             $regId = (int)$ost_arr['items'][$i]['regId'];
             $tovName = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['tovName']);
+            if ($tovName == 'Левофлоксацин таб. п/пл. об. 500мг №10') {
+                continue;
+            }
             $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
             $fabr = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['fabr']);
             $uQntOst = (int)$ost_arr['items'][$i]['uQntOst'];
