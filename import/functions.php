@@ -125,7 +125,7 @@ function ostByDate_file_get_contents_curl() {
     $context = stream_context_create($opts);
     //$file = file_get_contents('https://farmnet.ru:1988/OstByDate?customerId='.$customerId.'&date='.date("Y-m-dH:i:s"), false, $context); //для трех аптек на Просвещении
     //$file = file_get_contents('https://farmnet.ru:1988/OstByDate?parentId='.$parentId.'&date='.date("Y-m-dH:i:s"), false, $context);
-    $file = file_get_contents_curl('https://farmnet.ru:1988/OstByDate?parentId='.$parentId.'&date='.date("Y-m-dH:i:s"), $sessionId);
+    $file = file_get_contents_curl('https://farmnet.ru:1988/OstByDate?parentId='.$parentId.'&date='.date("Y-m-d%20H:i:s"), $sessionId);
     if (!$file) {
         mail_error('Ошибка с ostByDate_file_get_contents_curl');
         die;
