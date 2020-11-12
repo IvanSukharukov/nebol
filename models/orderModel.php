@@ -154,4 +154,5 @@ function mail_order($order_id, $email){
    
     mail($mail_apteka_order, $subject, $mail_body, $headers);
     mail('iva2742@mail.ru', $subject, $mail_body, $headers);
+    mail('zakazneboleyka@mail.ru', $subject, $mail_body, $headers);
 }
