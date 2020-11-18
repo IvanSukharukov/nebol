@@ -31,7 +31,7 @@
             </div>
             <div class="order_details__address">
                 <div class="order_details__title">Если нужна доставка - укажите адрес:</div>
-                <input type="text" id="no-enter" name="address" value="<?= $_SESSION['order']['addres'] ?>" placeholder="Доставка от 200 &#8381">
+                <input type="text" id="no-enter" name="address" value="<?= $_SESSION['order']['addres'] ?>" placeholder="Доставка от 350 &#8381">
             </div>
             <div class="order_details__note">
                 <div class="order_details__title">Примечание:</div>
