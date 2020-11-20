@@ -144,7 +144,7 @@ function mail_order_client($order_id, $email)
     $mail = new PHPMailer();
     $mail->CharSet = "utf-8"; //кодировка
     $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
-    $mail->addAddress($email, 'John'); // кому (email и имя)
+    $mail->addAddress($email); // кому (email и имя)
     $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
 
     ob_start(); // включаем буферизацию
@@ -165,7 +165,7 @@ function mail_order_admin($order_id, $email)
     $mail = new PHPMailer();
     $mail->CharSet = "utf-8"; //кодировка
     $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
-    $mail->addAddress($email, 'John'); // кому (email и имя)
+    $mail->addAddress($email); // кому (email и имя)
     $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
 
     ob_start(); // включаем буферизацию
