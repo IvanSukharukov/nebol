@@ -34,31 +34,6 @@ function write_txt_file(){
    }
    fwrite($fp, "\n");
    fclose($fp);
-
-
-
-//удалить после запуска в 003ms на постоянку
-/*    //записать полученный массив в txt
-   $fp = fopen('apteka_neboleyka_price.txt',
-      'w'
-   );
-   $field_description = 'TYP' . '|' . 'APTEKA' . '|' . 'PREPARAT' . '|' . 'PROIZV' . '|' . 'STRANA' . '|' . 'CENA' . '|' . 'OST' . '|' . 'SROK' . '|' . 'HREF';
-   fwrite($fp, $field_description . "\r\n");
-   foreach ($price_003ms as $product) {
-      $typ = "остатки";
-      $apteka = "{$product['branch']}"; //!
-      $preparat = "{$product['tovName']}";
-      $proizv = "{$product['fabr']}"; //!производитель и страна в одном поле, может обрезать?
-      $strana = "";
-      $cena = "{$product['pricerozn']}";
-      $ost = "{$product['ost']}";
-      $srok = "{$product['srokg']}";
-      $href = PATH . "product/" . "{$product['alias']}";
-      $data = $typ . '|' . $apteka . '|' . $preparat . '|' . $proizv . '|' . $strana . '|' . $cena . '|' . $ost . '|' . $srok . '|' . $href;
-      fwrite($fp, $data . "\r\n");
-   }
-   fwrite($fp, "\n");
-   fclose($fp); */
 }
 
 /**

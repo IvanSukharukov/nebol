@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'phpmailer/src/PHPMailer.php';
+
 /**
  * Распечатка массива/переменной
  * @param $array array
@@ -347,7 +351,7 @@ function adress_aptek(){
 /**
  *Отправка письма с информацией об импорте
  */
-function mail_import() {
+/* function mail_import() {
     $query_count = "SELECT COUNT(1) FROM `ostbydate_all`";
     $count_db = mysqli_query($GLOBALS['connection'], $query_count) or die(mysqli_error($GLOBALS['connection']));//сколько строк ПОСЛЕ ипорта
     $count_db = mysqli_fetch_assoc($count_db);
@@ -367,6 +371,32 @@ function mail_import() {
         
     mail('iva2742@mail.ru', $subject, $mail_body, $headers);//возможно стоит указать настоящий email админа жестко
     
+} */
+
+/**
+ *Отправка письма с информацией об импорте
+ */
+function mail_import()
+{
+    $query_count = "SELECT COUNT(1) FROM `ostbydate_all`";
+    $count_db = mysqli_query($GLOBALS['connection'], $query_count) or die(mysqli_error($GLOBALS['connection'])); //сколько строк ПОСЛЕ ипорта
+    $count_db = mysqli_fetch_assoc($count_db);
+
+    $query_date = "SELECT `date_import` FROM `ostbydate_all` LIMIT 1";
+    $date_import = mysqli_query($GLOBALS['connection'], $query_date) or die(mysqli_error($GLOBALS['connection'])); //дата последнего импорта
+    $date_import = mysqli_fetch_assoc($date_import);
+
+    $subject = "{$count_db['COUNT(1)']} строк, дата {$date_import['date_import']}";
+    echo $subject;
+
+
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8";//кодировка
+    $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Импорт') . '?=');// от кого (email и имя)
+    $mail->addAddress('iva2742@mail.ru', 'John'); // кому (email и имя)
+    $mail->Subject = "{$count_db['COUNT(1)']} строк, дата {$date_import['date_import']}"; // тема письма
+    $mail->msgHTML("В таблице {$count_db['COUNT(1)']} строк, дата обновления {$date_import['date_import']}"); //текст в письме 
+    $mail->send();
 }
 
 
@@ -375,17 +405,21 @@ function mail_import() {
  */
 function mail_error($mail_error) {
     
-    $subject = "Ошибка";
-    echo $subject;
-    
+   /*  $subject = "Ошибка";
+    echo $subject;    
     $headers = "Content-type: text/plain; charset=utf-8\r\n";
-    $headers .= "From: Ошибка аптека <" . ADMIN_EMAIL . ">\r\n";
+    $headers .= "From: Ошибка аптека <" . ADMIN_EMAIL . ">\r\n";    
+    $mail_body = "{$mail_error}";        
+    mail('iva2742@mail.ru', $subject, $mail_body, $headers); //возможно стоит указать настоящий email админа жестко
+ */
 
-    
-    $mail_body = "{$mail_error}";
-        
-    mail('iva2742@mail.ru', $subject, $mail_body, $headers);//возможно стоит указать настоящий email админа жестко
-    
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8"; //кодировка
+    $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Ошибка аптека') . '?='); // от кого (email и имя)
+    $mail->addAddress('iva2742@mail.ru', 'John'); // кому (email и имя)
+    $mail->Subject = "Ошибка"; // тема письма
+    $mail->msgHTML("{$mail_error}"); //текст в письме 
+    $mail->send();
 }
 
 /*

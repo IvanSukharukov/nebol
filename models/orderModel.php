@@ -1,6 +1,10 @@
 <?php
 defined("CATALOG") or die("Access denied");
 
+use PHPMailer\PHPMailer\PHPMailer;
+
+
+require $_SERVER['DOCUMENT_ROOT'] . '/import/phpmailer/src/PHPMailer.php';
 
 
 /**
@@ -104,9 +108,16 @@ function save_order($customer_id, $dostavka_id, $prim){
 
     if ($_SESSION['auth']['email']) $email = $_SESSION['auth']['email'];//авторизован
     else $email = $_SESSION['order']['email']; //не авторизован
-    
+
     //отправка писем
-    mail_order($order_id, $email);
+    mail_order_client($order_id, $email);
+    mail_order_admin($order_id, 'iva2742@mail.ru');
+
+    //узнаем email аптеки, в которой заказ
+    $key_apteka_order = array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branch_main_id'));
+    $mail_apteka_order = $GLOBALS['branches'][$key_apteka_order]['email'];
+
+    mail_order_admin($order_id, $mail_apteka_order);
     
     // если заказ выгрузился
     unset($_SESSION['cart']);
@@ -121,38 +132,46 @@ function save_order($customer_id, $dostavka_id, $prim){
 }
 
 
+
 /**
- * Отправка писем о заказе
+ * Отправка писем о заказе клиенту
  * @param $order_id
  * @param $email
  */
-function mail_order($order_id, $email){
-    //mail(to, subject, body, header);//куда, тема, тело, определить кодировку
-    // тема письма
-    $subject = "Новый заказ №{$order_id}";
-    // заголовки
-    $headers = "Content-type: text/html; charset=utf-8\r\n";
-    $headers .= "From: Аптека Неболейка <" . ADMIN_EMAIL . ">\r\n";
+function mail_order_client($order_id, $email)
+{
+
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8"; //кодировка
+    $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
+    $mail->addAddress($email, 'John'); // кому (email и имя)
+    $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
 
     ob_start(); // включаем буферизацию
     require 'mail/mail_order_client_inline.php'; // подключаем шаблон письма
-    $mail_body = ob_get_clean(); // выгружаем письмо из буфера   
-    if (!empty($email)) {
-        mail($email, $subject, $mail_body, $headers);
-    }
-    
+    $mail_body = ob_get_clean(); // выгружаем письмо из буфера  
+
+    $mail->msgHTML("{$mail_body}"); //текст в письме 
+    $mail->send();
+}
+
+/**
+ * Отправка писем о заказе админам
+ * @param $order_id
+ * @param $email
+ */
+function mail_order_admin($order_id, $email)
+{ 
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8"; //кодировка
+    $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
+    $mail->addAddress($email, 'John'); // кому (email и имя)
+    $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
 
     ob_start(); // включаем буферизацию
     require 'mail/mail_order_admin_inline.php'; // подключаем шаблон письма
-    $mail_body = ob_get_clean(); // выгружаем письмо из буфера
-  
-    $key_apteka_order = array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branch_main_id'));
+    $mail_body = ob_get_clean(); // выгружаем письмо из буфера  
 
-    $mail_apteka_order = $GLOBALS['branches'][$key_apteka_order]['email'];
-
-    //mail('aneboleyka@mail.ru', $subject, $mail_body, $headers);//возможно стоит указать настоящий email админа жестко
-   
-    mail($mail_apteka_order, $subject, $mail_body, $headers);
-    mail('iva2742@mail.ru', $subject, $mail_body, $headers);
-    mail('zakazneboleyka@mail.ru', $subject, $mail_body, $headers);
+    $mail->msgHTML("{$mail_body}"); //текст в письме 
+    $mail->send();
 }
