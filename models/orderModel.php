@@ -112,6 +112,7 @@ function save_order($customer_id, $dostavka_id, $prim){
     //отправка писем
     mail_order_client($order_id, $email);
     mail_order_admin($order_id, 'iva2742@mail.ru');
+    mail_order_admin($order_id, 'zakazneboleyka@mail.ru');
 
     //узнаем email аптеки, в которой заказ
     $key_apteka_order = array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branch_main_id'));
