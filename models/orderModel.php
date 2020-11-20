@@ -110,15 +110,17 @@ function save_order($customer_id, $dostavka_id, $prim){
     else $email = $_SESSION['order']['email']; //не авторизован
 
     //отправка писем
-    mail_order_client($order_id, $email);
-    mail_order_admin($order_id, 'iva2742@mail.ru');
-    mail_order_admin($order_id, 'zakazneboleyka@mail.ru');
+    if (!empty($mail)) {
+        mail_order_client($order_id, $email);
+    }
 
     //узнаем email аптеки, в которой заказ
     $key_apteka_order = array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branch_main_id'));
     $mail_apteka_order = $GLOBALS['branches'][$key_apteka_order]['email'];
 
     mail_order_admin($order_id, $mail_apteka_order);
+    mail_order_admin($order_id, 'zakazneboleyka@mail.ru');
+    mail_order_admin($order_id, 'iva2742@mail.ru');
     
     // если заказ выгрузился
     unset($_SESSION['cart']);
