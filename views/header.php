@@ -193,3 +193,4 @@
             </div>
         </div>
     </header>
+    <?php print_arr($_SESSION,''); ?>

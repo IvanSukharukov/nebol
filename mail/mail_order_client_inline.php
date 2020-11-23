@@ -113,19 +113,19 @@
                </td>
             </tr>
 
-            <?php if (empty($_SESSION['order']['addres'])) : ?>
-               <tr>
-                  <td bgcolor="#ffffff" style="border-collapse: collapse;">
-                     <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
-                        <tr>
-                           <td style="border-collapse: collapse;">
-                              Ваш заказ уже ждет Вас в аптеке по адресу: <b><?= $_SESSION['cart'][0]['branch'] ?></b><br>
-                           </td>
-                        </tr>
-                     </table>
-                  </td>
-               </tr>
-            <?php else : ?>
+
+            <tr>
+               <td bgcolor="#ffffff" style="border-collapse: collapse;">
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           Аптека оформления заказа: <b><?= $_SESSION['cart'][0]['branch'] ?></b><br>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <?php if (!empty($_SESSION['order']['addres'])) : ?>
                <tr>
                   <td bgcolor="#ffffff" style="border-collapse: collapse;">
                      <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
@@ -152,10 +152,21 @@
             </tr>
             <tr>
                <td style="border-collapse: collapse;">
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #ed1c24;">
+                     <tr>
+                        <td style="border-collapse: collapse;">
+                           <b>Готовность заказа уточняйте по телефону выбранной аптеки.</b><br>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <tr>
+               <td style="border-collapse: collapse;">
                   <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
                      <tr>
                         <td style="border-collapse: collapse;">
-                           Телефон: <?= $_SESSION['order']['phone'] ?><br>
+                           Телефон аптеки: <b><?= $_SESSION['phone'] ?></b><br>
                         </td>
                      </tr>
                   </table>
@@ -175,6 +186,19 @@
                   </td>
                </tr>
             <?php endif; ?>
+            <tr>
+               <td style="border-collapse: collapse;">
+                  <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #ed1c24;">
+                     <tr>
+                        <td>
+                           <b align="center">Наличие заказанных препаратов не гарантируется.</b><br>
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+
+
             <tr>
                <td bgcolor="#ffffff" style="border-collapse: collapse;">
                   <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">

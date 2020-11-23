@@ -15,6 +15,8 @@ if ($_POST['delete-cart']){
     unset($_SESSION['cart']);
     unset($_SESSION['total_sum']);
     unset($_SESSION['total_quantity']);
+    unset($_SESSION['branch']);
+    unset($_SESSION['phone']);
     redirect();
 }
 

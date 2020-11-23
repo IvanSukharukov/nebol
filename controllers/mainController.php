@@ -29,7 +29,7 @@ if (!empty(current($_SESSION['cart']))) {
 
 //все аптеки
 $branches = getBranches();
-
+$_SESSION['phone'] = $branches[array_search($branch, array_column($branches, 'branchId'))]['phone'];
 
 //print_arr($branches, '$branches');
 //print_arr($branch, '$branch');

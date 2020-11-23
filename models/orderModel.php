@@ -110,7 +110,7 @@ function save_order($customer_id, $dostavka_id, $prim){
     else $email = $_SESSION['order']['email']; //не авторизован
 
     //отправка писем
-    if (!empty($mail)) {
+    if (!empty($email)) {
         mail_order_client($order_id, $email);
     }
 

@@ -191,6 +191,7 @@ function addToCart($regid, $qty, $branchid, $pricerozn, $ost)
         array_push($_SESSION['cart'], ["regid" => $regid, "qty" => $qty]);
         $next_item = array_key_last($_SESSION['cart']); //последний ключ
         atributes_product($next_item, $branchid, $pricerozn, $ost, $regid);
+        $_SESSION['branch'] = $_SESSION['cart'][0]['branchid'];
     }
     
     return $_SESSION['cart'];
