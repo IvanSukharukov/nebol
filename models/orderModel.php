@@ -169,7 +169,11 @@ function mail_order_admin($order_id, $email)
     $mail->CharSet = "utf-8"; //кодировка
     $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
     $mail->addAddress($email); // кому (email и имя)
-    $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
+    if (!empty($_SESSION['order']['addres'])) {
+        $mail->Subject = "Новый заказ №{$order_id} - доставка";
+    } else {
+        $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
+    }
 
     ob_start(); // включаем буферизацию
     require 'mail/mail_order_admin_inline.php'; // подключаем шаблон письма
