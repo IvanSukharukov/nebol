@@ -1,11 +1,11 @@
 <?php
 defined("CATALOG") or die("Access denied");
 
-use PHPMailer\PHPMailer\PHPMailer;
-
-
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/import/phpmailer/src/PHPMailer.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PhpOffice\PhpWord\PhpWord;
 
 /**
  *Добавление заказа
@@ -170,6 +170,24 @@ function mail_order_admin($order_id, $email)
     $mail->setFrom(ADMIN_EMAIL, '=?UTF-8?B?' . base64_encode('Аптека Неболейка') . '?='); // от кого (email и имя)
     $mail->addAddress($email); // кому (email и имя)
     if (!empty($_SESSION['order']['addres'])) {
+        $document = new \PhpOffice\PhpWord\TemplateProcessor('Template.docx');
+        $document->setValue('deliv_name', $_SESSION['order']['name']);
+        $document->setValue('deliv_num_order', $order_id);
+
+        //$document->setValue('deliv_name', $order_id);
+        //$document->setValue('deliv_order', $_SESSION['order']['name']);
+
+        $document->setValue('deliv_phone', $_SESSION['order']['phone']);
+        $document->setValue('deliv_address', $_SESSION['order']['addres']);
+        $document->setValue('deliv_prim', $_SESSION['order']['prim']);
+        $document->setValue('deliv_price', $_SESSION['total_sum']);
+        $document->setValue('deliv_total_price', $_SESSION['total_sum'] + 350);
+        $document->saveAs("delivery_{$order_id}.docx");
+
+
+
+
+        $mail->addAttachment("delivery_{$order_id}.docx");//вложение - лист доставки
         $mail->Subject = "Новый заказ №{$order_id} - доставка";
     } else {
         $mail->Subject = "Новый заказ №{$order_id}"; // тема письма
@@ -181,4 +199,5 @@ function mail_order_admin($order_id, $email)
 
     $mail->msgHTML("{$mail_body}"); //текст в письме 
     $mail->send();
+    unlink("delivery_{$order_id}.docx");
 }
