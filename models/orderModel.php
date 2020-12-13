@@ -20,7 +20,10 @@ function add_order(){
     if(!$_SESSION['auth']['user']){
         $error = ''; // флаг проверки пустых полей
 
-        $name = clear($_POST['name']);
+        //$name = clear($_POST['name']);
+
+        $name = mb_convert_case(clear($_POST['name']), MB_CASE_TITLE, 'UTF-8');//Каждая первая буква большая
+        //mb_convert_case(clear($_POST['name']), MB_CASE_TITLE, 'UTF-8')
 
         $email = clear($_POST['email']);
         $phone = clear($_POST['phone']);
