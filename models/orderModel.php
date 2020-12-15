@@ -12,8 +12,11 @@ use PhpOffice\PhpWord\PhpWord;
  */
 function add_order(){
     // получаем общие данные для всех (авторизованные и не очень)
-    $dostavka_id = (int)$_POST['dostavka'];
-    if(!$dostavka_id) $dostavka_id = 1;
+
+    if(!empty($_POST['address'])) {
+        $dostavka_id = 1;
+    }
+    if(!$dostavka_id) $dostavka_id = 0;
     $prim = clear($_POST['prim']);
     if($_SESSION['auth']['user']) $customer_id = $_SESSION['auth']['customer_id'];
 
@@ -50,7 +53,7 @@ function add_order(){
     $_SESSION['order']['phone'] = $phone;
     $_SESSION['order']['addres'] = $address;
     $_SESSION['order']['prim'] = $prim;
-    save_order($customer_id, $dostavka_id, $prim);
+    save_order($customer_id, $dostavka_id, $address, $prim);
 }
 
 /**
@@ -79,9 +82,9 @@ function add_customer($name, $email, $phone, $address){
 /**
  *Сохранение заказа
  */
-function save_order($customer_id, $dostavka_id, $prim){
-    $query = "INSERT INTO orders (`customer_id`, `date`, `dostavka_id`, `prim`)
-                VALUES ($customer_id, NOW(), $dostavka_id, '$prim')";
+function save_order($customer_id, $dostavka_id, $address, $prim){
+    $query = "INSERT INTO orders (`customer_id`, `date`, `dostavka_id`, `dostavka_address`, `total_sum`, `prim`)
+                VALUES ($customer_id, NOW(), $dostavka_id, '$address', {$_SESSION['total_sum']}, '$prim')";
     mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
     if(mysqli_affected_rows($GLOBALS['connection']) == -1){
         // если не получилось сохранить заказ - удаляем заказчика
@@ -202,5 +205,36 @@ function mail_order_admin($order_id, $email)
 
     $mail->msgHTML("{$mail_body}"); //текст в письме 
     $mail->send();
-    unlink("delivery_{$order_id}.docx");
+    if (!empty($_SESSION['order']['addres'])) {
+        unlink("delivery_{$order_id}.docx");
+    }
 }
+
+/**
+ * Запросы для отчетов
+ */
+
+//показать заказы за период (год, месяц, число)
+//SELECT * FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+
+//количество заказов за период
+//SELECT COUNT(*) AS 'количество заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+
+//общая стоимость всех заказов за период
+//SELECT SUM(total_sum) AS 'общая стоимость всех заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+
+//общая стоимость доставок
+//SELECT SUM(total_sum) AS 'общая стоимость доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1
+
+//средний всех заказов
+//SELECT SUM(total_sum)/COUNT(*) AS 'средний всех заказов' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+
+//количество доставок
+//SELECT COUNT(*) AS 'доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+
+//средний чек доставок
+//SELECT SUM(total_sum)/COUNT(*) AS 'средний чек доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+
+
+
+
