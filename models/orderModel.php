@@ -215,25 +215,27 @@ function mail_order_admin($order_id, $email)
  */
 
 //показать заказы за период (год, месяц, число)
-//SELECT * FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+//SELECT * FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `prim`<>'test'
+
+
 
 //количество заказов за период
-//SELECT COUNT(*) AS 'количество заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+//SELECT COUNT(*) AS 'количество заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `prim`<>'test'
 
 //общая стоимость всех заказов за период
-//SELECT SUM(total_sum) AS 'общая стоимость всех заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00'
+//SELECT SUM(total_sum) AS 'общая стоимость всех заказов за период' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `prim`<>'test'
 
 //общая стоимость доставок
-//SELECT SUM(total_sum) AS 'общая стоимость доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1
+//SELECT SUM(total_sum) AS 'общая стоимость доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1 AND `prim`<>'test'
 
 //средний всех заказов
-//SELECT SUM(total_sum)/COUNT(*) AS 'средний всех заказов' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+//SELECT SUM(total_sum)/COUNT(*) AS 'средний всех заказов' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1 AND `prim`<>'test'
 
 //количество доставок
-//SELECT COUNT(*) AS 'доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+//SELECT COUNT(*) AS 'доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1 AND `prim`<>'test'
 
 //средний чек доставок
-//SELECT SUM(total_sum)/COUNT(*) AS 'средний чек доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1;
+//SELECT SUM(total_sum)/COUNT(*) AS 'средний чек доставок' FROM `orders` WHERE `date` >= '2020-12-15 00:00:00' AND `date` < '2020-12-16 00:00:00' AND `dostavka_id`=1 AND `prim`<>'test'
 
 
 
