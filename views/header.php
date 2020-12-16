@@ -62,7 +62,7 @@
             <div class="header__row">
                 <div class="header__body">
                     <a href="<?= PATH ?>" class="header__logo">
-                        <img src="<?= PATH ?>views/img/logo.png" alt="">
+                        <img src="<?= PATH ?>views/img/logo_ng.png" alt="">
                     </a>
                     <div class="header__burger">
                         <span></span>
