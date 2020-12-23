@@ -213,6 +213,7 @@ function addToCart($regid, $qty, $branchid, $pricerozn, $ost)
         $next_item = array_key_last($_SESSION['cart']); //последний ключ
         atributes_product($next_item, $branchid, $pricerozn, $ost, $regid);
         $_SESSION['branch'] = $_SESSION['cart'][0]['branchid'];
+        $_SESSION['branch_address'] = $_SESSION['cart'][0]['branch'];
     }
     
     return $_SESSION['cart'];
@@ -234,14 +235,13 @@ function atributes_product($next_item, $branchid, $pricerozn, $ost, $regid)
     $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `regid`='{$regid}' AND ostbydate_all.branchid = '{$branchid}' AND ostbydate_all. pricerozn = '{$pricerozn}' AND ostbydate_all.ost = '{$ost}'";
 
     $res = mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
-
     $row = mysqli_fetch_assoc($res);
-
     $_SESSION['cart'][$next_item]['branchid'] = $row['branchid'];
     $_SESSION['cart'][$next_item]['tovName'] = $row['tovName'];
     $_SESSION['cart'][$next_item]['fabr'] = $row['fabr'];
     $_SESSION['cart'][$next_item]['ost'] = $row['ost'];
     $_SESSION['cart'][$next_item]['pricerozn'] = $row['pricerozn'];
+    $_SESSION['cart'][$next_item]['priceopt'] = $row['priceopt'];
     $_SESSION['cart'][$next_item]['recipe'] = $row['recipe'];
     $_SESSION['cart'][$next_item]['branch'] = $row['branch'];
 }
@@ -259,6 +259,22 @@ function total_sum($goods)
     $total_sum = 0;
     foreach ($goods as $good) {
         $total_sum += $good['qty'] * $good['pricerozn'];
+    }
+
+    return $total_sum;
+}
+
+/**
+ * Сумма заказа в корзине
+ * @param $goods
+ * @return float|int
+ */
+function total_sum_opt($goods)
+//function total_sum($goods, $branchid, $pricerozn, $ost)
+{
+    $total_sum = 0;
+    foreach ($goods as $good) {
+        $total_sum += $good['qty'] * $good['priceopt'];
     }
 
     return $total_sum;

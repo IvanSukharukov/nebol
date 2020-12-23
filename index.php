@@ -6,8 +6,6 @@ session_start();
 //если в сессии нет массива корзины, то создаем его
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
-    $_SESSION['total_items'] = 0;
-    $_SESSION['total_price'] = 0; //'0.00'
     $_SESSION['branch'] = 'all'; //'0.00'
 }
 

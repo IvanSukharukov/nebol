@@ -193,3 +193,5 @@
             </div>
         </div>
     </header>
+
+    <?php db($_SESSION); ?>

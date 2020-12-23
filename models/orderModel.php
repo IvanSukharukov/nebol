@@ -53,7 +53,7 @@ function add_order(){
     $_SESSION['order']['phone'] = $phone;
     $_SESSION['order']['addres'] = $address;
     $_SESSION['order']['prim'] = $prim;
-    save_order($customer_id, $dostavka_id, $address, $prim);
+    save_order($customer_id, $name, $dostavka_id, $address, $prim);
 }
 
 /**
@@ -82,9 +82,9 @@ function add_customer($name, $email, $phone, $address){
 /**
  *Сохранение заказа
  */
-function save_order($customer_id, $dostavka_id, $address, $prim){
-    $query = "INSERT INTO orders (`customer_id`, `date`, `dostavka_id`, `dostavka_address`, `total_sum`, `prim`)
-                VALUES ($customer_id, NOW(), $dostavka_id, '$address', {$_SESSION['total_sum']}, '$prim')";
+function save_order($customer_id, $customer_name, $dostavka_id, $address, $prim){
+    $query = "INSERT INTO orders (`customer_id`, `branchid`, `customer_name`, `date`, `dostavka_id`, `dostavka_address`, `total_sum`, `sum_opt`, `prim`)
+                VALUES ($customer_id, '{$GLOBALS['branch']}', '$customer_name', NOW(), $dostavka_id, '$address', {$_SESSION['total_sum']}, '{$_SESSION['sum_opt']}', '$prim')";
     mysqli_query($GLOBALS['connection'], $query) or die(mysqli_error($GLOBALS['connection']));
     if(mysqli_affected_rows($GLOBALS['connection']) == -1){
         // если не получилось сохранить заказ - удаляем заказчика
@@ -131,6 +131,7 @@ function save_order($customer_id, $dostavka_id, $address, $prim){
     // если заказ выгрузился
     unset($_SESSION['cart']);
     unset($_SESSION['total_sum']);
+    unset($_SESSION['sum_opt']);
     unset($_SESSION['total_quantity']);
     $_SESSION['order']['res'] = "<div class='order-success'>Ваш <span>заказ №{$order_id}</span> принят!<br> Данные о заказе отправлены на e-mail, указанный при оформлении.<br>
     Аптека заказа: <span>{$GLOBALS['branches'][array_search($GLOBALS['branch'], array_column($GLOBALS['branches'], 'branchId'))]['address']}</span><br>

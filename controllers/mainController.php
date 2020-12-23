@@ -3,7 +3,6 @@ defined("CATALOG") or die("Access denied");
 include 'config.php';
 include 'models/mainModel.php';
 //require_once 'models/productModel.php';
-
 //$branchid = 1;
 if (isset($_POST['addtocart'])) {
     $regid = abs((int)$_POST['regid']);
@@ -12,13 +11,18 @@ if (isset($_POST['addtocart'])) {
     $pricerozn = abs((float)$_POST['pricerozn']);//цена приводится к float, возможно где-то не будет работать, в БД тип decimal(10,1)
     $ost = abs((int)$_POST['ost']);
 
+    
     addToCart($regid, $qty, $branchid, $pricerozn, $ost);
  
     $_SESSION['total_sum'] = total_sum($_SESSION['cart']);
+    $_SESSION['sum_opt'] = total_sum_opt($_SESSION['cart']);
+    
     // кол-во товара в корзине + защита от ввода несуществующего ID товара
     total_quantity();
     redirect();
 }
+
+
 
 //записать в $_COOKIE['branch'] id аптеки первого добавленного товара
 if (!empty(current($_SESSION['cart']))) {
