@@ -173,7 +173,7 @@
                   <table class="table-600 mail-title" cellpadding="0" cellspacing="0" width="600" align="center" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font: 17px/24px Roboto, Arial, sans-serif;color: #222;">
                      <tr>
                         <td style="border-collapse: collapse;">
-                           Аптека совершения заказа: <b><?= $_SESSION['cart'][0]['branch'] ?></b><br>
+                           Аптека совершения заказа: <b><?= $_SESSION['branch_address'] ?></b><br>
                         </td>
                      </tr>
                   </table>
