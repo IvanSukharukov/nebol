@@ -38,8 +38,8 @@ $year = date("Y");
 $month = date("m");
 $day = date("d");
 
-//если январь, то отчет за декабрь
-if ($month == 01) {
+//если 01 января, то отчет за декабрь
+if ($month ==01 && $day == 01) {
    $year = $year - 1;
 }
 
@@ -60,7 +60,7 @@ function query_report($query, $branchid = null, $dostavka_id = null)
    $day = date("d");
 
    //если январь, то отчет за декабрь
-   if ($month == 01) {
+   if ($month == 01 && $day == 01) {
       $year = $year - 1;
    }
 
@@ -71,9 +71,9 @@ function query_report($query, $branchid = null, $dostavka_id = null)
    }
 
    if ($branchid !== null) {
-      if ($dostavka_id !== null) {
+      if ($dostavka_id !== null) {//доставка
          $query_report = mysqli_fetch_assoc(mysqli_query($GLOBALS['connection'], "SELECT {$query} AS 'data' FROM `orders` WHERE `date` >= '{$year}-{$month}-01 00:00:00' AND `date` < '{$year}-{$month}-{$day} 23:59:59' AND `customer_name`<>'Test' AND `dostavka_id` = {$dostavka_id} AND `branchid` = {$branchid} AND `sum_opt` > 0"));
-      } else {
+      } else {//самовывоз
          $query_report = mysqli_fetch_assoc(mysqli_query($GLOBALS['connection'], "SELECT {$query} AS 'data' FROM `orders` WHERE `date` >= '{$year}-{$month}-01 00:00:00' AND `date` < '{$year}-{$month}-{$day} 23:59:59' AND `customer_name`<>'Test' AND `branchid` = {$branchid} AND `sum_opt` > 0"));
       }
    } else {//данные по всем аптекам
