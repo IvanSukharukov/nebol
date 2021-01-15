@@ -1,7 +1,7 @@
 <form action="" method="post">
     <div class="product">
         <!-- <div class="product_name"><a href='<?= PATH ?>product/<?= $product['alias'] ?>?branchid=<?= $product['branchid'] ?>&pricerozn=<?= $product['pricerozn'] ?>&ost=<?= $product['ost'] ?>'><?= $product['tovName'] ?></a></div> -->
-        <div class="fabr address-product">Аптека: <?= $product['branch'] ?></div>
+        <div class="fabr address-product">Аптека: <?= $product['branch'] ?>; <b><?= $product['phone'] ?></b></div>
         <div class="product_content">
             <div class="fabr">Производитель: <?= $product['fabr'] ?></div>
             <div class="ost">В наличии: <?= $product['ost'] ?> шт.</div>
@@ -19,8 +19,10 @@
                 <input type="hidden" name="pricerozn" value="<?= $product['pricerozn'] ?>">
                 <input type="hidden" name="ost" value="<?= $product['ost'] ?>">
                 <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id="">В корзину</button>
-                
-                <!-- <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id=""><?php //if (empty($_SESSIN['cart'])) echo "<a href=\"#zatemnenie\">" ?>В корзину<?php //if (empty($_SESSIN['cart'])) echo "</a>" ?></button> -->
+
+                <!-- <button type="submit" name="addtocart" class="product_to_cart_btn _catalog_btn" id=""><?php //if (empty($_SESSIN['cart'])) echo "<a href=\"#zatemnenie\">" 
+                                                                                                            ?>В корзину<?php //if (empty($_SESSIN['cart'])) echo "</a>" 
+                                                                                                                                                                                            ?></button> -->
             </div>
         </div>
     </div>

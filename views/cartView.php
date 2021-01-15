@@ -12,7 +12,7 @@
             <form method="post" action="" class="product-cart">
                 <div class="product">
                     <div class="product_name"><?= $product['tovName'] ?></div>
-                    <div class="fabr address-product">Аптека: <?= $product['branch'] ?></div>
+                    <div class="fabr address-product">Аптека: <?= $product['branch'] ?>; <b><?= $_SESSION['phone'] ?></b></div>
                     <div class="product_content">
                         <div class="fabr">Производитель: <?= $product['fabr'] ?></div>
                         <div class="ost">В наличии: <?= $product['ost'] ?> шт.</div>
