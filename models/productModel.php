@@ -16,12 +16,12 @@ function get_one_product($product_alias, $branch)
         //echo $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND ostbydate_all.branchid = {$_GET['branchid']}";
 
         if ($branch === 1) {
-                $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' ORDER BY ostbydate_all.branchid, pricerozn";
+                $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' ORDER BY branches.priority, pricerozn";
         } else {
                 //этот запрос работал некорректно, если добавлялся маркированный товар
                 //$query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND ostbydate_all.branchid = '$branch' ORDER BY pricerozn";
 
-                $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND branches.branch_main_id = '$branch' ORDER BY ostbydate_all.branchid, pricerozn";
+                $query = "SELECT * FROM ostbydate_all JOIN branches ON branches.branchid = ostbydate_all.branchid WHERE `alias`= '$product_alias' AND branches.branch_main_id = '$branch' ORDER BY branches.priority, pricerozn";
         }
 
         $res = mysqli_query($GLOBALS['connection'], $query);
