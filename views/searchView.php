@@ -15,9 +15,11 @@
         </div>
 
         <div class="content_catalog">
-
-            <div class="search_result">Результаты поиска по запросу: <span><?= $_GET['search'] ?></span></div>
-
+            <?php if (empty($_GET['search'])) : ?>
+                <div class="search_result">Поиск лекарств:</div>
+            <?php else : ?>
+                <div class="search_result">Результаты поиска по запросу: <span><?= $_GET['search'] ?></span></div>
+            <?php endif; ?>
             <div class="search_form_catalog">
                 <form action="<?= PATH ?>search/" method="get">
                     <div class="search_form_catalog_content">
