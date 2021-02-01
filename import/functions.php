@@ -278,15 +278,13 @@ function write_db_OstByDate_all($ost_arr)
             }
             $regId = (int)$ost_arr['items'][$i]['regId'];
             $tovName = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['tovName']);
-            if ($tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №1 (пач.карт.)' ||
-                $tovName == 'Цефтриаксон фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №1 пач.карт.' ||
-                $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 2г №1 (пач.карт.)' ||
-                $tovName == 'Цефтриаксон фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №50' ||
-                $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №50' ||
-                $tovName == 'Клексан шприц (р-р д/ин.) 4000 анти-Ха МЕ/0,4 мл №10 (с защитной системой иглы)'
+            //стоп-лист препаратов
+            /* if (
+                    $tovName == 'Цефтриаксон-АКОС фл.(пор. д/приг. р-ра д/в/в и в/м введ.) 1г №50' ||
+                    $tovName == 'Клексан шприц (р-р д/ин.) 4000 анти-Ха МЕ/0,4 мл №10 (с защитной системой иглы)'
                 ) {
                 continue;
-            }
+            } */
             $alias = mysqli_real_escape_string($connection, translit($ost_arr['items'][$i]['tovName']));
             $fabr = mysqli_real_escape_string($connection, $ost_arr['items'][$i]['fabr']);
             $uQntOst = (int)$ost_arr['items'][$i]['uQntOst'];
