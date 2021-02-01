@@ -113,17 +113,17 @@ $worksheet->getCell('G6')->setValue(query_report('SUM(sum_opt)', 9117, 1));
 
 
 //Просвещения 24
-$worksheet->getCell('B7')->setValue(query_report('COUNT(*)', 10964));
-$worksheet->getCell('B8')->setValue(query_report('COUNT(*)', 10964, 0));
-$worksheet->getCell('C8')->setValue(query_report('COUNT(*)', 10964, 1));
+$worksheet->getCell('B7')->setValue(query_report('COUNT(*)', 16606));
+$worksheet->getCell('B8')->setValue(query_report('COUNT(*)', 16606, 0));
+$worksheet->getCell('C8')->setValue(query_report('COUNT(*)', 16606, 1));
 
-$worksheet->getCell('D7')->setValue(query_report('SUM(total_sum)', 10964));
-$worksheet->getCell('D8')->setValue(query_report('SUM(total_sum)', 10964, 0));
-$worksheet->getCell('E8')->setValue(query_report('SUM(total_sum)', 10964, 1));
+$worksheet->getCell('D7')->setValue(query_report('SUM(total_sum)', 16606));
+$worksheet->getCell('D8')->setValue(query_report('SUM(total_sum)', 16606, 0));
+$worksheet->getCell('E8')->setValue(query_report('SUM(total_sum)', 16606, 1));
 
-$worksheet->getCell('F7')->setValue(query_report('SUM(sum_opt)', 10964));
-$worksheet->getCell('F8')->setValue(query_report('SUM(sum_opt)', 10964, 0));
-$worksheet->getCell('G8')->setValue(query_report('SUM(sum_opt)', 10964, 1));
+$worksheet->getCell('F7')->setValue(query_report('SUM(sum_opt)', 16606));
+$worksheet->getCell('F8')->setValue(query_report('SUM(sum_opt)', 16606, 0));
+$worksheet->getCell('G8')->setValue(query_report('SUM(sum_opt)', 16606, 1));
 
 
 //Композиторов 22
